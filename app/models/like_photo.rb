@@ -1,0 +1,2 @@
+class LikePhoto < ApplicationRecord
+end

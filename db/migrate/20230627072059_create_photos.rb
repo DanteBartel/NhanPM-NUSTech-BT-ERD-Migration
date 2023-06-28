@@ -5,7 +5,8 @@ class CreatePhotos < ActiveRecord::Migration[7.0]
       t.text :description, null: false
       t.boolean :is_public, default: true    # This is share mode
       t.timestamp :day_of_publish
-      t.text :photo, null: false      
+      t.text :photo, null: false
+      t.integer :no_like, default: 0
       t.integer :user_id
 
       t.timestamps

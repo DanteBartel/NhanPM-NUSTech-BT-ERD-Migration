@@ -6,7 +6,6 @@ class CreateAlbums < ActiveRecord::Migration[7.0]
       t.boolean :is_public, default: true    # This is share mode
       t.timestamp :day_of_publish
       t.integer :no_picture, default: 0
-      t.integer :no_like, default: 0
       t.integer :user_id
 
       t.timestamps

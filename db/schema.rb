@@ -10,5 +10,77 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 0) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_29_032536) do
+  create_table "album_pictures", force: :cascade do |t|
+    t.text "picture", null: false
+    t.integer "album_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "albums", force: :cascade do |t|
+    t.text "title", null: false
+    t.text "description", null: false
+    t.boolean "is_public", default: true
+    t.integer "no_picture", default: 0
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "no_like", default: 0
+  end
+
+  create_table "follows", force: :cascade do |t|
+    t.integer "follower_id"
+    t.integer "followee_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "like_albums", id: false, force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "album_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "like_photos", id: false, force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "photo_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "photos", force: :cascade do |t|
+    t.text "title", null: false
+    t.text "description", null: false
+    t.boolean "is_public", default: true
+    t.text "photo", null: false
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "no_like", default: 0
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "fname", null: false
+    t.string "lname", null: false
+    t.string "email", null: false
+    t.string "pass", null: false
+    t.text "avatar"
+    t.integer "no_photo", default: 0
+    t.integer "no_album", default: 0
+    t.datetime "last_log_in"
+    t.boolean "is_active", default: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "no_following", default: 0
+    t.integer "no_follower", default: 0
+    t.boolean "is_admin", default: false
+  end
+
+  add_foreign_key "album_pictures", "albums"
+  add_foreign_key "albums", "users"
+  add_foreign_key "follows", "users", column: "followee_id"
+  add_foreign_key "follows", "users", column: "follower_id"
+  add_foreign_key "photos", "users"
 end

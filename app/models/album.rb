@@ -1,5 +1,5 @@
 class Album < ApplicationRecord
-    validates :title, :description, :day_of_publish, :is_public, :no_picture, :no_like, presence: true
+    validates :title, :description, presence: true
     validates :title, length: {maximum: 140}
     validates :description, length: {maximum: 300}
     validates :is_public, inclusion: {in: [true, false]}

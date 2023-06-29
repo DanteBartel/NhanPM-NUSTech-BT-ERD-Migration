@@ -8,8 +8,6 @@ class CreateUsers < ActiveRecord::Migration[7.0]
       t.text :avatar
       t.integer :no_photo, default: 0
       t.integer :no_album, default: 0
-      t.integer :no_following, default: 0
-      t.integer :no_follower, default: 0
       t.timestamp :last_log_in
       t.boolean :is_active, default: true    # status, but using this name with boolean for more clarity
 

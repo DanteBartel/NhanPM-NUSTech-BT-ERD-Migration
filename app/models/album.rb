@@ -6,4 +6,8 @@ class Album < ApplicationRecord
     validates :no_picture, :no_like, numericality: {only_integer: true}
     validates :no_picture, :no_like, comparison: {greater_than_or_equal_to: 0}
     validates :no_picture, comparison: {less_than_or_equal_to: 25}
+
+    # Association
+    belongs_to :user, counter_cache: true
+    has_many :like_albums, dependent: :destroy
 end

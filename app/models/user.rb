@@ -8,8 +8,13 @@ class User < ApplicationRecord
     validates :no_photo, :no_album, :no_following, :no_follower, comparison: {greater_than_or_equal_to: 0}
     validates :is_active, inclusion: {in: [true, false]}
 
-    # Email format: prefix @ domain
+    # Email format: prefix @ domain - this format is using the example from the internet
     validates :email, format: {with: /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/}
 
-    # The content of the avatar has not been implemented yet, so its validation will be detailed later. :avatar has maximum size of 2Mb and must have format in [jpeg, png]
+    # Association
+    has_many :photos, dependent: :destroy
+    has_many :albums, dependent: :destroy
+    has_many :like_photos, dependent: :destroy
+    has_many :like_albums, dependent: :destroy
+    
 end

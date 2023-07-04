@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_29_032536) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_03_063007) do
   create_table "album_pictures", force: :cascade do |t|
     t.text "picture", null: false
     t.integer "album_id"
@@ -27,6 +27,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_29_032536) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "no_like", default: 0
+    t.integer "like_albums_count"
   end
 
   create_table "follows", force: :cascade do |t|
@@ -39,15 +40,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_29_032536) do
   create_table "like_albums", id: false, force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "album_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "like_photos", id: false, force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "photo_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "photos", force: :cascade do |t|
@@ -59,6 +56,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_29_032536) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "no_like", default: 0
+    t.integer "like_photos_count"
   end
 
   create_table "users", force: :cascade do |t|
@@ -76,11 +74,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_29_032536) do
     t.integer "no_following", default: 0
     t.integer "no_follower", default: 0
     t.boolean "is_admin", default: false
+    t.integer "photos_count"
+    t.integer "albums_count"
   end
 
   add_foreign_key "album_pictures", "albums"
   add_foreign_key "albums", "users"
   add_foreign_key "follows", "users", column: "followee_id"
   add_foreign_key "follows", "users", column: "follower_id"
+  add_foreign_key "like_albums", "albums"
+  add_foreign_key "like_albums", "users"
+  add_foreign_key "like_photos", "photos"
+  add_foreign_key "like_photos", "users"
   add_foreign_key "photos", "users"
 end

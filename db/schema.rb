@@ -26,7 +26,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_03_063007) do
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "no_like", default: 0
     t.integer "like_albums_count"
   end
 
@@ -37,12 +36,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_03_063007) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "like_albums", id: false, force: :cascade do |t|
+  create_table "like_albums", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "album_id", null: false
   end
 
-  create_table "like_photos", id: false, force: :cascade do |t|
+  create_table "like_photos", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "photo_id", null: false
   end
@@ -55,7 +54,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_03_063007) do
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "no_like", default: 0
     t.integer "like_photos_count"
   end
 
@@ -65,17 +63,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_03_063007) do
     t.string "email", null: false
     t.string "pass", null: false
     t.text "avatar"
-    t.integer "no_photo", default: 0
-    t.integer "no_album", default: 0
     t.datetime "last_log_in"
     t.boolean "is_active", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "no_following", default: 0
-    t.integer "no_follower", default: 0
     t.boolean "is_admin", default: false
     t.integer "photos_count"
     t.integer "albums_count"
+    t.integer "followees_count"
+    t.integer "followers_count"
   end
 
   add_foreign_key "album_pictures", "albums"

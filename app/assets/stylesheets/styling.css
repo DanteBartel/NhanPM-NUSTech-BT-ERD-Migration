@@ -1,0 +1,56 @@
+/* Global set up */
+.bg-theme {
+    background-color: rgb(60,90,154);
+}
+.bg-theme01 {
+    background-color: rgb(242, 242, 242);
+}
+.color-theme {
+    color: rgb(60,90,154);
+}
+/* Styling for things in navigation bar on top of the page */
+.head-navigation-bar {
+    color: white;
+    font-weight: 400;
+}
+.navigation-bar-logo {
+    font-weight: 600;
+    text-decoration: none;
+    color: white;
+}
+.navigation-bar-logo:hover {
+    color: white;
+}
+.navigation-bar-inout {
+    text-decoration: none;
+    color: white;
+}
+.navigation-bar-inout:hover {
+    color: white;
+}
+.navigation-bar-profile {
+    text-decoration: none;
+    color: white;
+}
+.navigation-bar-profile:hover {
+    color: white;
+}
+div.profile-picture-container {
+    width: 28px;
+    height: 28px;
+    border-radius: 20px;
+    font-size: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+}
+/* --------------------------------- */
+/* General format for pages */
+.main-background {
+    background-color: rgb(242, 242, 242);
+}
+.hero-text-font {
+    font-size: xx-large;
+    font-weight: 700;
+}

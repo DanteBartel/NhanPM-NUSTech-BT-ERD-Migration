@@ -1,0 +1,43 @@
+<nav class="head-navigation-bar bg-theme navbar navbar-expand-sm py-1 sticky-top">
+    <div class="container-fluid justify-content-start">
+        <a class="navigation-bar-logo col-4 col-xl-2 px-1 px-xl-4 text-start text-xl-end" href="#">Fotobook</a>
+        <div class="me-auto py-1 order-4 order-xl-2">
+            <input type="search" placeholder="Search Photo / Album">
+        </div>
+        
+        <a class="invisible navigation-bar-profile d-flex align-items-center py-1 ms-auto ms-xl-0 me-3 me-xl-5 order-2 order-xl-3" href="#">
+            <div class="profile-picture-container bg-light color-theme me-2">
+                NP
+            </div>
+            <div>Nhan Pham</div>
+        </a>
+        <a class="navigation-bar-inout pe-2 order-3 order-xl-4" href="login.html">Login</a>
+        <button class="invisible btn border order-5 d-xl-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapSideBar" aria-expanded="false" aria-controls="collapSideBar">
+            <img src="../icon/menu-2-white.svg" alt="menu-icon">
+        </button>                
+    </div>
+</nav> 
+
+
+<main>
+    <div class="py-5 container">
+        <div class="col-9 col-xl-6 mx-auto">
+            <p class="hero-text-font color-theme text-center">Fotobook Signup</p>
+            <form class="authen-form shadow px-3 pt-2">
+                <strong>First name</strong> <br>
+                <input type="text" class="form-control" placeholder="First name" required autofocus>
+                <strong>Last name</strong> <br>
+                <input type="text" class="form-control" placeholder="Last name" required>
+                <strong>Email</strong> <br>
+                <input type="text" class="form-control" placeholder="Email" required>
+                <strong>New password</strong> <br>
+                <input type="text" class="form-control" placeholder="Password" required>
+                <strong>Password confirmation</strong> <br>
+                <input type="text" class="form-control" placeholder="Password" required>
+                <div class="d-flex justify-content-center p-3">
+                    <button class="btn btn-primary btn-block bg-theme" type="submit">Sign up</button>
+                </div>                        
+            </form>
+        </div>
+    </div>
+</main>

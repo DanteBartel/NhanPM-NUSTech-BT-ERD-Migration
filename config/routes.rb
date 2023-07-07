@@ -1,8 +1,14 @@
 Rails.application.routes.draw do  
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
+  # routes for devise
+  devise_for :users
+  as :user do
+    get '/' => 'devise/sessions#new'
+  end
+
   # Defines the root path route ("/")
-  root "temps#signup"
+  # root "temps#feed"
   get "/temps/signup", to: "temps#signup"
   get "/temps/login", to: "temps#login"
   get "/temps/feed", to: "temps#feed"

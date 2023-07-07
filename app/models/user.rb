@@ -1,8 +1,9 @@
 class User < ApplicationRecord
-    validates :fname, :lname, :email, :pass, presence: true
+    # Testing devise so temporarily disable fname and lname validations
+    # validates :fname, :lname, :email, presence: true
+    validates :email, presence: true
     validates :fname, :lname, length: {maximum: 25}
     validates :email, length: {maximum: 255}
-    validates :pass, length: {maximum: 64}
     validates :email, uniqueness: true
     validates :is_active, inclusion: {in: [true, false]}
 
@@ -20,4 +21,9 @@ class User < ApplicationRecord
     has_many :follows_as_followee, class_name: "Follow", foreign_key: "followee_id", dependent: :destroy
     has_many :followers, through: :follows_as_followee, source: :follower
     has_many :followees, through: :follows_as_follower, source: :followee
+
+    # Additional components for devise gem
+    devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable
+
+    # Note: remember the max length of password is 64
 end

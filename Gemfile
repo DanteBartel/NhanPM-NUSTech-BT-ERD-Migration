@@ -71,6 +71,10 @@ group :test do
   gem "webdrivers"
 end
 
+gem "solargraph", "~> 0.49.0"
+
 gem 'bootstrap', '~> 5.2', '>= 5.2.3'
 gem "jquery-rails"
 gem "sassc-rails"
+
+gem "devise"

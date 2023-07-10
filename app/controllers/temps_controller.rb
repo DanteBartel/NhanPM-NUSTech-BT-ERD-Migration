@@ -23,4 +23,7 @@ class TempsController < ApplicationController
   def edit_photo
     
   end
+  def manage_photo
+    
+  end
 end

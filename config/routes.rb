@@ -7,8 +7,20 @@ Rails.application.routes.draw do
     get '/' => 'devise/sessions#new'
   end
 
-  # Defines the root path route ("/")
-  # root "temps#feed"
+  # routes for directing to passthrough controller after login
+  get "/passthrough/index", to: "passthrough#index"
+  get "/temps/manage_photo", to: "temps#manage_photo"
+
+  # Routes for the feeds
+  get "/feeds/feeds_photos", to: "feeds#feeds_photos"
+  get "/feeds/discover_photos", to: "feeds#discover_photos"
+  get "/feeds/feeds_albums", to: "feeds#feeds_albums"
+  get "/feeds/discover_albums", to: "feeds#discover_albums"
+
+  # Routes for profiles
+  get "/users/:user_id/photos", to: "users#"
+
+  # temps route when first init this project
   get "/temps/signup", to: "temps#signup"
   get "/temps/login", to: "temps#login"
   get "/temps/feed", to: "temps#feed"

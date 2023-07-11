@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # routes for devise
-  devise_for :users
+  devise_for :users, controllers: { sessions: 'users/sessions' }
   as :user do
     get '/' => 'devise/sessions#new'
   end
@@ -18,7 +18,20 @@ Rails.application.routes.draw do
   get "/feeds/discover_albums", to: "feeds#discover_albums"
 
   # Routes for profiles
-  get "/users/:user_id/photos", to: "users#"
+  get "/profile/photos", to: "profile/personal#photos"
+  get "/profile/albums", to: "profile/personal#albums"
+  get "/profile/followees", to: "profile/personal#followees"
+  get "/profile/followers", to: "profile/personal#followers"
+  get "/profile/:user_id/photos", to: "profile/public#photos"
+  get "/profile/:user_id/albums", to: "profile/public#albums"
+  get "/profile/:user_id/followees", to: "profile/public#followees"
+  get "/profile/:user_id/followers", to: "profile/public#followers"
+
+  # Routes for CRUD photos
+  resources :users do
+    resources :photos
+    resources :albums
+  end
 
   # temps route when first init this project
   get "/temps/signup", to: "temps#signup"

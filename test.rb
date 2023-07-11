@@ -1,0 +1,1 @@
+p "sad" + 2.to_s + "sab"

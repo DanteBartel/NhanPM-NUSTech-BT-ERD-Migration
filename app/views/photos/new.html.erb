@@ -69,6 +69,29 @@
                     </div>                            
                 </form>
             </div>
+            <!-- Horrizone line -->
+            <hr/>
+            <!-- Temporary form for developing -->
+            <%= form_with url: "/users/" + @user.id.to_s + "/photos", method: :post do %>
+                <div>
+                    <%= label_tag "title" %>
+                    <%= text_field_tag "title", nil %>
+                </div>
+                <div>
+                    <%= label_tag "description" %>
+                    <%= text_field_tag "description", nil %>
+                </div>
+                <div>
+                    <%= label_tag "is_public" %>
+                    <%= select_tag "is_public", options_for_select([ "Public", "Private" ]), prompt: 'Choose one...' %>
+                </div>
+                <div>
+                    <%= label_tag "photo" %>
+                    <%= text_field_tag "photo", nil %>
+                </div>
+                <%= submit_tag "Save" %>
+            <% end %>
+
             
 
         </div>

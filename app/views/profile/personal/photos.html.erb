@@ -46,8 +46,8 @@
             </div>
             <!-- Buttons -->
             <div class="py-2 d-flex justify-content-end">
-                <a type="button" class="btn btn-primary border bg-success" href="/users/1/photos/new">Add New Photo</a>
-            </div>
+                <a type="button" class="btn btn-primary border bg-success" href=<%= "/users/" + current_user.id.to_s + "/photos/new" %>>Add New Photo</a>
+            </div>            
             <!-- Horrizone line -->
             <hr/>
             <!-- List of My Photo items -->

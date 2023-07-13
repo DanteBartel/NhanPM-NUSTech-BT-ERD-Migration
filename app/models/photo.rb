@@ -7,4 +7,9 @@ class Photo < ApplicationRecord
     # Association
     belongs_to :user, counter_cache: true
     has_many :like_photos, dependent: :destroy
+
+    # Attach image with active storage
+    has_one_attached :image do |attachable|
+        attachable.variant :thumb, resize_to_limit: [100, 100]
+    end
 end

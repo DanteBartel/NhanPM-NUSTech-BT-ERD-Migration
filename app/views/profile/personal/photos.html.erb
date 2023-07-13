@@ -162,6 +162,25 @@
                     <li class="page-item"><a class="page-link" href="#">Next</a></li>
                 </ul>
             </div>
+
+            <!-- Test showing photos -->
+            <div>
+                <ul>
+                    <% @photos.each do |pho| %>
+                        <li>
+                        <% if pho.image.representable? %>
+                            <%= image_tag(pho.image.variant(resize_to_limit: [100, 100])) %>
+                            <%= image_tag(pho.image, style:"width:150px; height::150px") %>
+                            <%= image_tag pho.image, style:"width:150px; height::150px" %>
+                            <%= image_tag pho.image.variant(resize: "150 x 150") %>
+                            <%= image_tag pho.image.variant(:thumb) %>
+                        <% else %>
+                            <div>No photos</div>
+                        <% end %>
+                        </li>
+                    <% end %>
+                </ul>
+            </div>
             
 
         </div>

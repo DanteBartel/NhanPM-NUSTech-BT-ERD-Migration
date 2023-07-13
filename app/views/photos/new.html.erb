@@ -72,7 +72,7 @@
             <!-- Horrizone line -->
             <hr/>
             <!-- Temporary form for developing -->
-            <%= form_with url: "/users/" + @user.id.to_s + "/photos", method: :post do %>
+            <%= form_with url: "/users/" + @user.id.to_s + "/photos", method: :post do |f| %>
                 <div>
                     <%= label_tag "title" %>
                     <%= text_field_tag "title", nil %>
@@ -88,7 +88,17 @@
                 <div>
                     <%= label_tag "photo" %>
                     <%= text_field_tag "photo", nil %>
+                </div>               
+                <hr> 
+                <div data-controller="photo-preview">
+                    <%= f.label :image %>
+                    <div class="d-none" data-photo-preview-target="previewSection">
+                        <img alt="..." data-photo-preview-target="imagePreview"/>
+                        <button data-photo-preview-target="clearUpload" data-action="photo-preview#clearUpload">
+                    </div>
+                    <%= f.file_field :image, data: {photo_preview_target: "imageUploader", action: "photo-preview#updatePreview"} %>
                 </div>
+                <hr>
                 <%= submit_tag "Save" %>
             <% end %>
 

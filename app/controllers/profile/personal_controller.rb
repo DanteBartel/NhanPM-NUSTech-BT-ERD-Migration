@@ -1,14 +1,6 @@
 class Profile::PersonalController < ApplicationController
     def photos
-
-    end
-    def albums
-
-    end
-    def followees
-
-    end
-    def followers
-        
-    end
+        user = User.includes(:photos).find(current_user.id)
+        @photos = user.photos
+    end    
 end

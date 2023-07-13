@@ -45,65 +45,40 @@
             <hr/>
             <!-- List of inputs -->
             <div class="container-fluid">
-                <form class="row g-3">
+                <%= form_with url: "/users/" + @user.id.to_s + "/photos", method: :post, class: "row g-3" do |f| %>
+
+
                     <div class="col-12 col-xl-6">
                         <div>Title</div>
-                        <input type="text" class="form-control" placeholder="Photo Title" required autofocus>
+                        <%= text_field_tag "title", nil, class: "form-control", placeholder: "Photo Title", required: true, autofocus: true %>
+
                         <div>Sharing mode</div>                                
-                        <select class="form-select">
-                            <option>Public</option>
-                            <option>Private</option>
-                        </select>
+                        <%= select_tag "is_public", options_for_select([ "Public", "Private" ]), class: "form-select" %>
                     </div>
                     <div class="col-12 col-xl-6">
                         <div>Description</div>
-                        <textarea type="text" class="form-control" rows="4" placeholder="Photo Description" required></textarea>
+                        <%= text_area_tag "description", nil, class: "form-control", rows: "4", placeholder: "Photo Description", required: true %>
                     </div>
+
+
                     <div class="col-12">
-                        <div class="newPhotoReviewZone d-flex justify-content-center align-items-center bg-theme01">
-                            <img class="newPhotoReviewIcon" src="/icon/plus-mini-grey.svg" alt="...">
+                        <div class="newPhotoReviewZone d-flex justify-content-center align-items-center bg-theme01" data-controller="photo-preview" onclick="document.getElementById('selectedFile').click();">
+                            <img class="newPhotoReviewIcon" src="/icon/plus-mini-grey.svg" alt="..." data-photo-preview-target="addIcon">
+                            
+                            <div class="d-none" data-photo-preview-target="previewSection">
+                                <img class="newPhotoReviewZone" alt="..." data-photo-preview-target="imagePreview"/>
+                            </div>
+
+                            <%= f.file_field :image, data: {photo_preview_target: "imageUploader", action: "photo-preview#updatePreview"}, id: "selectedFile", class: "d-none", required: true %>
                         </div>
                     </div>
                     <div class="col-12">
-                        <button class="btn btn-primary btn-block bg-theme" type="submit">Save</button>
-                    </div>                            
-                </form>
-            </div>
-            <!-- Horrizone line -->
-            <hr/>
-            <!-- Temporary form for developing -->
-            <%= form_with url: "/users/" + @user.id.to_s + "/photos", method: :post do |f| %>
-                <div>
-                    <%= label_tag "title" %>
-                    <%= text_field_tag "title", nil %>
-                </div>
-                <div>
-                    <%= label_tag "description" %>
-                    <%= text_field_tag "description", nil %>
-                </div>
-                <div>
-                    <%= label_tag "is_public" %>
-                    <%= select_tag "is_public", options_for_select([ "Public", "Private" ]), prompt: 'Choose one...' %>
-                </div>
-                <div>
-                    <%= label_tag "photo" %>
-                    <%= text_field_tag "photo", nil %>
-                </div>               
-                <hr> 
-                <div data-controller="photo-preview">
-                    <%= f.label :image %>
-                    <div class="d-none" data-photo-preview-target="previewSection">
-                        <img alt="..." data-photo-preview-target="imagePreview"/>
-                        <button data-photo-preview-target="clearUpload" data-action="photo-preview#clearUpload">
+                        <%= submit_tag "Save", class: "btn btn-primary btn-block bg-theme" %>
                     </div>
-                    <%= f.file_field :image, data: {photo_preview_target: "imageUploader", action: "photo-preview#updatePreview"} %>
-                </div>
-                <hr>
-                <%= submit_tag "Save" %>
-            <% end %>
 
-            
 
+                <% end %>
+            </div>
         </div>
     </div>
 </div>

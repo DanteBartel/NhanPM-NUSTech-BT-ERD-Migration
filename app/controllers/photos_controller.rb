@@ -14,7 +14,7 @@ class PhotosController < ApplicationController
 
   private
   def new_photo_params
-    new_photo = params.permit(:title, :description, :is_public, :photo, :user_id)
+    new_photo = params.permit(:title, :description, :is_public, :user_id)
   end
   def new_photo_image_params
     new_image = params[:image]

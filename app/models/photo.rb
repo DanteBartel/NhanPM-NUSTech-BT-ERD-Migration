@@ -1,5 +1,5 @@
 class Photo < ApplicationRecord
-    validates :title, :description, :photo, presence: true
+    validates :title, :description, presence: true
     validates :title, length: {maximum: 140}
     validates :description, length: {maximum: 300}
     validates :is_public, inclusion: {in: [true, false]}

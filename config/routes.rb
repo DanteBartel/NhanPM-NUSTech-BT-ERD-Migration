@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   get "/feeds/discover_albums", to: "feeds#discover_albums"
 
   # Routes for profiles
+  put "/profile/edit", to: "profile/personal#edit"
   get "/profile/photos", to: "profile/personal#photos"
   get "/profile/albums", to: "profile/personal#albums"
   get "/profile/followees", to: "profile/personal#followees"

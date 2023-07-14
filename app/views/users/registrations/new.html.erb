@@ -32,11 +32,11 @@
 
                   <!-- fname -->
                   <strong>First name</strong> <br>
-                  <input type="text" class="form-control" placeholder="First name" required autofocus>
+                  <%= f.text_field :fname, class: "form-control", placeholder: "First name", required: true, autofocus: true %>
 
                   <!-- lname -->
                   <strong>Last name</strong> <br>
-                  <input type="text" class="form-control" placeholder="Last name" required>
+                  <%= f.text_field :lname, class: "form-control", placeholder: "Last name", required: true %>
 
                   <!-- email -->
                   <strong>Email</strong> <br>

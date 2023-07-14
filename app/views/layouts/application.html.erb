@@ -10,9 +10,11 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
-    <p class="notice"><%= notice %></p> 
-    <p class="alert"><%= alert %></p>
+  <body>    
+
+    <%= yield %>
+
+    
 
     <% if user_signed_in? %> 
       <div> Welcome <%= current_user.email %> </div> 
@@ -21,7 +23,8 @@
       <%= button_to "Sign in", new_user_session_path %> 
     <% end %>
 
-    <%= yield %>
+    <p class="notice"><%= notice %></p> 
+    <p class="alert"><%= alert %></p>
     
   </body>
 </html>

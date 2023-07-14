@@ -1,3 +1,77 @@
+<nav class="head-navigation-bar bg-theme navbar navbar-expand-sm py-1 sticky-top">
+    <div class="container-fluid justify-content-start">
+        <a class="navigation-bar-logo col-4 col-xl-2 px-1 px-xl-4 text-start text-xl-end" href="#">Fotobook</a>
+        <div class="me-auto py-1 order-4 order-xl-2">
+            <input type="search" placeholder="Search Photo / Album">
+        </div>
+        
+        <a class="invisible navigation-bar-profile d-flex align-items-center py-1 ms-auto ms-xl-0 me-3 me-xl-5 order-2 order-xl-3" href="#">
+            <div class="profile-picture-container bg-light color-theme me-2">
+                NP
+            </div>
+            <div>Nhan Pham</div>
+        </a>
+        <a class="navigation-bar-inout pe-2 order-3 order-xl-4" href="login.html">Login</a>
+        <button class="invisible btn border order-5 d-xl-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapSideBar" aria-expanded="false" aria-controls="collapSideBar">
+            <img src=/icon/menu-2-white.svg" alt="menu-icon">
+        </button>                
+    </div>
+</nav>
+        
+
+<main>
+    <div class="py-5 container">
+        <div class="col-9 col-xl-6 mx-auto">
+            <p class="hero-text-font color-theme text-center">Fotobook Login</p>
+
+            
+            <div class="authen-form shadow px-3">
+                <%= form_for resource, as: resource_name, url: session_path(resource_name), class: "authen-form shadow px-3" do |f| %>
+                    <!-- Avatar -->
+                    <div class="d-flex justify-content-center p-3">
+                        <img class="rounded-circle" src="/image/01.png" alt="01.png">    
+                    </div>     
+                    
+                    <!-- Email -->
+                    <%= f.email_field :email, class: "form-control", placeholder: "Email", required: true, autofocus: true %>
+
+                    <!-- Password -->
+                    <%= f.password_field :password, class: "form-control", placeholder: "Password", required: true %>
+
+                    <!-- Login button -->
+                    <div class="d-flex justify-content-center mt-3">
+                        <%= f.submit "Login", class: "btn btn-primary btn-block bg-theme" %>
+                    </div>
+
+                    <!-- Anomious user button -->
+                    <div class="d-flex justify-content-center mt-3">
+                        <a class="btn btn-primary btn-block bg-theme" href="feed.html">Demo</a>
+                    </div>
+
+                    <!-- Redirect for forgoting password user -->
+                    <div class="d-flex justify-content-center py-2">
+                        <a href="#">Forgot password?</a>
+                    </div>
+                
+                <% end %>
+            </div>
+
+
+            <div class="d-flex justify-content-center py-2">
+                <%= link_to "Create an account", new_registration_path(resource_name) %>
+            </div>
+
+
+        </div>
+    </div>
+</main>
+
+
+
+
+
+
+<!--
 <h2>Log in</h2>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
@@ -23,4 +97,8 @@
   </div>
 <% end %>
 
-<%= render "devise/shared/links" %>
+<%= render "users/shared/links" %>
+-->
+
+
+

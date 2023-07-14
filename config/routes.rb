@@ -2,9 +2,9 @@ Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # routes for devise
-  devise_for :users, controllers: { sessions: 'users/sessions' }
+  devise_for :users, controllers: { sessions: 'users/sessions', registrations: "users/registrations" }
   as :user do
-    get '/' => 'devise/sessions#new'
+    get '/' => 'users/sessions#new'
   end
 
   # routes for directing to passthrough controller after login

@@ -40,7 +40,7 @@
             <!-- Statement and button -->
             <div class="py-2 d-flex justify-content-start">
                 <div class="d-flex align-items-center">
-                    <strong>Edit Photo</strong>
+                    <strong>Edit Album</strong>
                 </div>                        
                 <a type="button" class="btn btn-primary ms-auto border bg-theme" href="my_photo.html">Back</a>
             </div>
@@ -48,31 +48,56 @@
             <hr/>
             <!-- List of inputs -->
             <div class="container-fluid">
-                <form class="row g-3">
+                
+                
+                <%= form_with(url: "/albums/" + @album.id.to_s, method: :put, class: "row g-3") do |f| %>
+
+                    <!-- Basic info -->
                     <div class="col-12 col-xl-6">
                         <div>Title</div>
-                        <input type="text" class="form-control" placeholder="Photo Title" value="Nam tempor posuere faucilub" required autofocus>
-                        <div>Sharing mode</div>                                
-                        <select class="form-select">
-                            <option>Public</option>
-                            <option>Private</option>
-                        </select>
+                        <%= text_field_tag "title", @album.title, class: "form-control", placeholder: "Album Title", required: true, autofocus: true %>
+                        <div>Sharing mode</div>
+                        <%= select_tag "is_public", options_for_select([["Public", true], ["Private", false]], @album.is_public), class: "form-select" %>
                     </div>
+
+
                     <div class="col-12 col-xl-6">
                         <div>Description</div>
-                        <textarea type="text" class="form-control" rows="4" placeholder="Photo Description" required>Aliquam dictum nec massa ac consequat. Etiam dignissim tincidunt tellus sed vestibulum. Sed vitae vestibulum purus. Curabitur malesuada libero in nibh pretium, sed malesuada nisi feugiat.</textarea>
+                        <%= text_area_tag "description", @album.description, class: "form-control", rows: "4", placeholder: "Album Description", required: true %>
                     </div>
+
+
+                    <!-- Photo -->
                     <div class="col-12">
-                        <div class="newPhotoReviewZone position-relative">
-                            <img class="editPhotoReviewImg" src="/image/02.png" alt="...">
-                            <img class="editPhotoReviewCross position-absolute" src="/icon/cross-brown.svg" alt="...">
+
+                        
+
+                        <div class="newPhotoReviewZone d-flex justify-content-center align-items-center bg-theme01" data-controller="edit-photo-preview" onclick="document.getElementById('selectedFile').click();">
+                            
+                            <div class="d-none" data-edit-photo-preview-target="previewSection">
+                                <img class="newPhotoReviewZone" alt="..." data-edit-photo-preview-target="imagePreview"/>
+                            </div>
+
+                            <% if @album.images[0].representable? %>
+                                <%= image_tag @album.images[0], class: "newPhotoReviewZone", data: {edit_photo_preview_target: "initImage"} %>
+                            <% end %>
+
+                            <%= f.file_field :image, data: {edit_photo_preview_target: "imageUploader", action: "edit-photo-preview#updatePreview"}, id: "selectedFile", class: "d-none" %>
+
                         </div>
                     </div>
-                    <div class="col-12">
-                        <button class="btn btn-success btn-block" type="submit">Save</button>
-                        <button class="btn btn-danger btn-block" type="submit">Delete</button>
-                    </div>                            
-                </form>
+
+
+                    <!-- Submit and delete buttons -->
+                    <div class="col-12 actions">
+                        <%= submit_tag "Save", class: "btn btn-primary btn-block bg-theme" %>
+                        <%= link_to "Delete", "/albums/" + @album.id.to_s, method: "delete", class: "btn btn-danger btn-block" %>
+                    </div>
+
+
+
+
+                <% end %>
             </div>
 
 

@@ -12,7 +12,19 @@ class AlbumsController < ApplicationController
     end
 
     def edit
+        @album = Album.find(params[:id])
+    end
 
+    def update
+        album = Album.find(params[:id])
+        album.update!(update_album_params)
+    end
+
+    def destroy
+        album = Album.find(params[:id])
+        if album.destroy!
+            redirect_to "/profile/albums"
+        end
     end
 
 
@@ -26,5 +38,9 @@ class AlbumsController < ApplicationController
 
     def new_album_image_params
         params[:image]
+    end
+
+    def update_album_params
+        params.permit(:title, :description, :is_public)
     end
 end

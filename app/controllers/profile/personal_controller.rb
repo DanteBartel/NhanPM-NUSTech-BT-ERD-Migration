@@ -3,6 +3,10 @@ class Profile::PersonalController < ApplicationController
         user = User.includes(:photos).find(current_user.id)
         @photos = user.photos
     end
+    def albums
+        user = User.includes(:albums).find(current_user.id)
+        @albums = user.albums
+    end
     def edit
         user = User.find(current_user.id)
         user.update!(edit_params)

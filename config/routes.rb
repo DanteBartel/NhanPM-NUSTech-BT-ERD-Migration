@@ -35,6 +35,7 @@ Rails.application.routes.draw do
   end
   resources :photos, only: [:edit, :update, :destroy]
   resources :albums, only: [:edit, :update, :destroy]
+  delete "/albums/:album_id/image/:image_id", to: "albums#dropImage"
 
   # temps route when first init this project
   # get "/temps/signup", to: "temps#signup"

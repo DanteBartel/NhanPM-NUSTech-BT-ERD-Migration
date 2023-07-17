@@ -67,24 +67,47 @@
                     </div>
 
 
-                    <!-- Photo -->
+                    <!-- Edit Images -->
                     <div class="col-12">
+                        <div class="container-fluid p-0">
+                            <div class="row g-3">
 
-                        
+                                <!-- Images already in the albums -->
+                                <% @album.images.each_with_index do |img, idx| %>
+                                    <div class="col-auto">
+                                        <div class="myPhotoItem position-relative">
+                                            <!-- Image -->
+                                            <% if img.representable? %>
+                                                <%= image_tag img, class: "myPhotoItemImg" %>
+                                            <% end %>
+                                            <!-- discard "x" button -->
+                                            <%= link_to "/albums/" + @album.id.to_s + "/image/" + idx.to_s, method: :delete do %>
+                                                <img class="editPhotoReviewCross position-absolute" src="/icon/cross-brown.svg" alt="...">
+                                            <% end %>
+                                            <!--
+                                            <a href="#">
+                                                <img class="editPhotoReviewCross position-absolute" src="/icon/cross-brown.svg" alt="...">
+                                            </a>
+                                            -->                                            
+                                        </div>
+                                    </div>
+                                <% end %>
 
-                        <div class="newPhotoReviewZone d-flex justify-content-center align-items-center bg-theme01" data-controller="edit-photo-preview" onclick="document.getElementById('selectedFile').click();">
-                            
-                            <div class="d-none" data-edit-photo-preview-target="previewSection">
-                                <img class="newPhotoReviewZone" alt="..." data-edit-photo-preview-target="imagePreview"/>
+                                <!-- Additional image -->
+                                <div class="col-auto">
+                                    <div class="newPhotoReviewZone d-flex justify-content-center align-items-center bg-theme01" data-controller="photo-preview" onclick="document.getElementById('selectedFile').click();">
+                                        <img class="newPhotoReviewIcon" src="/icon/plus-mini-grey.svg" alt="..." data-photo-preview-target="addIcon">
+                                        
+                                        <div class="d-none" data-photo-preview-target="previewSection">
+                                            <img class="newPhotoReviewZone" alt="..." data-photo-preview-target="imagePreview"/>
+                                        </div>
+
+                                        <%= f.file_field :image, data: {photo_preview_target: "imageUploader", action: "photo-preview#updatePreview"}, id: "selectedFile", class: "d-none", required: true %>
+                                    </div>
+                                </div>
+
                             </div>
-
-                            <% if @album.images[0].representable? %>
-                                <%= image_tag @album.images[0], class: "newPhotoReviewZone", data: {edit_photo_preview_target: "initImage"} %>
-                            <% end %>
-
-                            <%= f.file_field :image, data: {edit_photo_preview_target: "imageUploader", action: "edit-photo-preview#updatePreview"}, id: "selectedFile", class: "d-none" %>
-
-                        </div>
+                        </div>                        
                     </div>
 
 

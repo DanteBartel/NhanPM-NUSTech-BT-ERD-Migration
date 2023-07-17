@@ -33,8 +33,8 @@ Rails.application.routes.draw do
     resources :photos, only: [:new, :create]
     resources :albums, only: [:new, :create]
   end
-  resources :photos, only: [:edit, :update]
-  resources :albums, only: [:edit, :update]
+  resources :photos, only: [:edit, :update, :destroy]
+  resources :albums, only: [:edit, :update, :destroy]
 
   # temps route when first init this project
   # get "/temps/signup", to: "temps#signup"

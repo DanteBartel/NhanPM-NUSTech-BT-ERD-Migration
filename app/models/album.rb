@@ -8,4 +8,7 @@ class Album < ApplicationRecord
     # Association
     belongs_to :user, counter_cache: true
     has_many :like_albums, dependent: :destroy
+
+    # Attach image with active storage
+    has_many_attached :images
 end

@@ -4,11 +4,15 @@ class AlbumsController < ApplicationController
     end
 
     def create
-        new_photo = Photo.new(new_photo_params)
-        new_photo.image.attach(new_photo_image_params)
-        if new_photo.save!
-          redirect_to "/profile/photos"
+        new_album = Album.new(new_album_params)
+        new_album.images.attach(new_album_image_params)
+        if new_album.save!
+          redirect_to "/albums/" + new_album.id.to_s + "/edit"
         end
+    end
+
+    def edit
+
     end
 
 
@@ -16,11 +20,11 @@ class AlbumsController < ApplicationController
 
     private
 
-    def new_photo_params
+    def new_album_params
         params.permit(:title, :description, :is_public, :user_id)
     end
 
-    def new_photo_image_params
+    def new_album_image_params
         params[:image]
     end
 end

@@ -28,7 +28,7 @@
             <div class="d-flex flex-column align-items-center">
                 <div class="py-2">
                     <a class="feed-sidebar-item deactive-page nav-link p-1" href="feed.html">Feeds</a>
-                    <a class="feed-sidebar-item deactive-page nav-link p-1" href="myPhoto.html">My photos</a>
+                    <a class="feed-sidebar-item deactive-page nav-link p-1" href="my_photo.html">My photos</a>
                     <a class="feed-sidebar-item deactive-page nav-link p-1" href="myAlbum.html">My albums</a>                            
                 </div>                        
             </div>                    
@@ -37,48 +37,45 @@
 
         <!-- Inside the feed -->
         <div class="col-xl-8 pb-2 mx-auto mt-3 bg-light row row-cols-1 justify-content-center">
-            <!-- Statement -->
+            <!-- Statement and button -->
             <div class="py-2 d-flex justify-content-start">
-                <strong>New Album</strong>
+                <div class="d-flex align-items-center">
+                    <strong>Edit Photo</strong>
+                </div>                        
+                <a type="button" class="btn btn-primary ms-auto border bg-theme" href="my_photo.html">Back</a>
             </div>
             <!-- Horrizone line -->
             <hr/>
             <!-- List of inputs -->
             <div class="container-fluid">
-                <%= form_with url: "/users/" + @user.id.to_s + "/albums", method: :post, class: "row g-3" do |f| %>
-
-
+                <form class="row g-3">
                     <div class="col-12 col-xl-6">
                         <div>Title</div>
-                        <%= text_field_tag "title", nil, class: "form-control", placeholder: "Album Title", required: true, autofocus: true %>
-
+                        <input type="text" class="form-control" placeholder="Photo Title" value="Nam tempor posuere faucilub" required autofocus>
                         <div>Sharing mode</div>                                
-                        <%= select_tag "is_public", options_for_select([ ["Public", true], ["Private", false] ]), class: "form-select" %>
+                        <select class="form-select">
+                            <option>Public</option>
+                            <option>Private</option>
+                        </select>
                     </div>
                     <div class="col-12 col-xl-6">
                         <div>Description</div>
-                        <%= text_area_tag "description", nil, class: "form-control", rows: "4", placeholder: "Album Description", required: true %>
+                        <textarea type="text" class="form-control" rows="4" placeholder="Photo Description" required>Aliquam dictum nec massa ac consequat. Etiam dignissim tincidunt tellus sed vestibulum. Sed vitae vestibulum purus. Curabitur malesuada libero in nibh pretium, sed malesuada nisi feugiat.</textarea>
                     </div>
-
-
                     <div class="col-12">
-                        <div class="newPhotoReviewZone d-flex justify-content-center align-items-center bg-theme01" data-controller="photo-preview" onclick="document.getElementById('selectedFile').click();">
-                            <img class="newPhotoReviewIcon" src="/icon/plus-mini-grey.svg" alt="..." data-photo-preview-target="addIcon">
-                            
-                            <div class="d-none" data-photo-preview-target="previewSection">
-                                <img class="newPhotoReviewZone" alt="..." data-photo-preview-target="imagePreview"/>
-                            </div>
-
-                            <%= f.file_field :image, data: {photo_preview_target: "imageUploader", action: "photo-preview#updatePreview"}, id: "selectedFile", class: "d-none", required: true %>
+                        <div class="newPhotoReviewZone position-relative">
+                            <img class="editPhotoReviewImg" src="/image/02.png" alt="...">
+                            <img class="editPhotoReviewCross position-absolute" src="/icon/cross-brown.svg" alt="...">
                         </div>
                     </div>
                     <div class="col-12">
-                        <%= submit_tag "Save", class: "btn btn-primary btn-block bg-theme" %>
-                    </div>
-
-
-                <% end %>
+                        <button class="btn btn-success btn-block" type="submit">Save</button>
+                        <button class="btn btn-danger btn-block" type="submit">Delete</button>
+                    </div>                            
+                </form>
             </div>
+
+
         </div>
     </div>
 </div>

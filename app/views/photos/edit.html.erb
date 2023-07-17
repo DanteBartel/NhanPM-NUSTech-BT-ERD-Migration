@@ -85,10 +85,13 @@
                     </div>
 
 
-                    <!-- Submit button -->
+                    <!-- Submit and delete buttons -->
                     <div class="col-12 actions">
                         <%= submit_tag "Save", class: "btn btn-primary btn-block bg-theme" %>
+                        <%= link_to "Delete", "/photos/" + @photo.id.to_s, method: "delete", class: "btn btn-danger btn-block" %>
                     </div>
+
+
 
 
                 <% end %>

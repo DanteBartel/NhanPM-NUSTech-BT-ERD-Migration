@@ -1,2 +1,26 @@
 class AlbumsController < ApplicationController
+    def new
+        @user = User.find(params[:user_id])
+    end
+
+    def create
+        new_photo = Photo.new(new_photo_params)
+        new_photo.image.attach(new_photo_image_params)
+        if new_photo.save!
+          redirect_to "/profile/photos"
+        end
+    end
+
+
+
+
+    private
+
+    def new_photo_params
+        params.permit(:title, :description, :is_public, :user_id)
+    end
+
+    def new_photo_image_params
+        params[:image]
+    end
 end

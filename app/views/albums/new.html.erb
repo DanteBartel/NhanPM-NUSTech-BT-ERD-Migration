@@ -39,7 +39,7 @@
         <div class="col-xl-8 pb-2 mx-auto mt-3 bg-light row row-cols-1 justify-content-center">
             <!-- Statement -->
             <div class="py-2 d-flex justify-content-start">
-                <strong>New Photo</strong>
+                <strong>New Album</strong>
             </div>
             <!-- Horrizone line -->
             <hr/>
@@ -50,14 +50,14 @@
 
                     <div class="col-12 col-xl-6">
                         <div>Title</div>
-                        <%= text_field_tag "title", nil, class: "form-control", placeholder: "Photo Title", required: true, autofocus: true %>
+                        <%= text_field_tag "title", nil, class: "form-control", placeholder: "Album Title", required: true, autofocus: true %>
 
                         <div>Sharing mode</div>                                
                         <%= select_tag "is_public", options_for_select([ ["Public", true], ["Private", false] ]), class: "form-select" %>
                     </div>
                     <div class="col-12 col-xl-6">
                         <div>Description</div>
-                        <%= text_area_tag "description", nil, class: "form-control", rows: "4", placeholder: "Photo Description", required: true %>
+                        <%= text_area_tag "description", nil, class: "form-control", rows: "4", placeholder: "Album Description", required: true %>
                     </div>
 
 

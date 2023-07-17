@@ -1,7 +1,6 @@
 class PhotosController < ApplicationController
   def new
     @user = User.find(params[:user_id])
-    @photo = Photo.new
   end
 
   def create
@@ -12,11 +11,35 @@ class PhotosController < ApplicationController
     end
   end
 
-  private
-  def new_photo_params
-    new_photo = params.permit(:title, :description, :is_public, :user_id)
+  def edit
+    @photo = Photo.find(params[:id])
   end
+
+  def update
+    photo = Photo.find(params[:id])
+    photo.update!(update_photo_params)
+    if update_photo_image_params
+      photo.image.purge
+      photo.image.attach(update_photo_image_params)
+    end
+  end
+
+
+  private
+
+  def new_photo_params
+    params.permit(:title, :description, :is_public, :user_id)
+  end
+
   def new_photo_image_params
-    new_image = params[:image]
+    params[:image]
+  end
+
+  def update_photo_params
+    params.permit(:title, :description, :is_public)
+  end
+
+  def update_photo_image_params
+    params[:image]
   end
 end

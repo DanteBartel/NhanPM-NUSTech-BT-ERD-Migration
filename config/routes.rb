@@ -30,17 +30,19 @@ Rails.application.routes.draw do
 
   # Routes for CRUD photos
   resources :users do
-    resources :photos
-    resources :albums
+    resources :photos, only: [:new, :create]
+    resources :albums, only: [:new, :create]
   end
+  resources :photos, only: [:edit, :update]
+  resources :albums, only: [:edit, :update]
 
   # temps route when first init this project
-  get "/temps/signup", to: "temps#signup"
-  get "/temps/login", to: "temps#login"
-  get "/temps/feed", to: "temps#feed"
-  get "/temps/feed_album", to: "temps#feed_album"
-  get "/temps/my_photo", to: "temps#my_photo"
-  get "/temps/my_album", to: "temps#my_album"
-  get "/temps/new_photo", to: "temps#new_photo"
-  get "/temps/edit_photo", to: "temps#edit_photo"
+  # get "/temps/signup", to: "temps#signup"
+  # get "/temps/login", to: "temps#login"
+  # get "/temps/feed", to: "temps#feed"
+  # get "/temps/feed_album", to: "temps#feed_album"
+  # get "/temps/my_photo", to: "temps#my_photo"
+  # get "/temps/my_album", to: "temps#my_album"
+  # get "/temps/new_photo", to: "temps#new_photo"
+  # get "/temps/edit_photo", to: "temps#edit_photo"
 end

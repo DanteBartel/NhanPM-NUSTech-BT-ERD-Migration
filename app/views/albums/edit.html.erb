@@ -83,12 +83,7 @@
                                             <!-- discard "x" button -->
                                             <%= link_to "/albums/" + @album.id.to_s + "/image/" + idx.to_s, method: :delete do %>
                                                 <img class="editPhotoReviewCross position-absolute" src="/icon/cross-brown.svg" alt="...">
-                                            <% end %>
-                                            <!--
-                                            <a href="#">
-                                                <img class="editPhotoReviewCross position-absolute" src="/icon/cross-brown.svg" alt="...">
-                                            </a>
-                                            -->                                            
+                                            <% end %>                                    
                                         </div>
                                     </div>
                                 <% end %>
@@ -102,7 +97,7 @@
                                             <img class="newPhotoReviewZone" alt="..." data-photo-preview-target="imagePreview"/>
                                         </div>
 
-                                        <%= f.file_field :image, data: {photo_preview_target: "imageUploader", action: "photo-preview#updatePreview"}, id: "selectedFile", class: "d-none", required: true %>
+                                        <%= f.file_field :image, data: {photo_preview_target: "imageUploader", action: "photo-preview#updatePreview"}, id: "selectedFile", class: "d-none" %>
                                     </div>
                                 </div>
 

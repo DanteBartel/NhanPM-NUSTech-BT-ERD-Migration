@@ -45,12 +45,48 @@
             <hr/>
             <!-- List of inputs -->
             <div class="container-fluid">
-              <strong>User avatar</strong> <br>
-              <br>
-
-
               <!-- Form for Basic info -->
               <%= form_with url: "/profile/edit", html: { method: :put } do |f| %>
+                <!-- Avatar -->
+                <strong>User avatar</strong> <br>
+                  <div data-controller="avatar-preview">
+
+                    <div class="newPhotoReviewZone d-flex justify-content-center align-items-center bg-theme01" onclick="document.getElementById('selectedFile').click();">
+                      <!-- the preview section -->
+                      <div class="d-none" data-avatar-preview-target="previewSection">
+                        <img class="newPhotoReviewZone" alt="..." data-avatar-preview-target="imagePreview"/>
+                      </div>
+                      <!-- the cross icon -->
+                      <div class="<%= "text-center " + (current_user.avatar.attached? ? "d-none" : "") %>" data-avatar-preview-target="crossSection">
+                        <img class="newPhotoReviewIcon" src="/icon/plus-mini-grey.svg" alt="...">
+                      </div>
+                      <!-- the init avatar -->
+                      <% if current_user.avatar.attached? %>
+                        <%= image_tag current_user.avatar, class: "newPhotoReviewZone", data: {avatar_preview_target: "initImage"} %>
+                      <% end %>
+                      <!-- hidden file field -->
+                      <%= f.file_field :avatar, data: {avatar_preview_target: "imageUploader", action: "avatar-preview#updatePreview"}, id: "selectedFile", class: "d-none" %>
+                      <!-- param clear Avatar for -->
+                      <%= f.hidden_field :clearAvatar, value: (current_user.avatar.attached? ? 0 : 1), data: {avatar_preview_target: "clearAvatar"} %>
+                    </div>
+
+                    <br>
+
+                    <button type="button" data-action="click->avatar-preview#clearAvatar">
+                      Clear Avatar
+                    </button>
+
+                    <button type="button" data-action="click->avatar-preview#resetAvatar">
+                      Reset Avatar
+                    </button>
+
+                  </div>
+                
+
+                <br>
+
+
+                <!-- Info -->
                 <strong>Basic information</strong> <br>
                 <div class="field">
                   <%= f.label "First name" %><br />

@@ -25,5 +25,8 @@ class User < ApplicationRecord
     # Additional components for devise gem
     devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable
 
+    # Using active storage for avatar
+    has_one_attached :avatar
+
     # Note: remember the max length of password is 64
 end

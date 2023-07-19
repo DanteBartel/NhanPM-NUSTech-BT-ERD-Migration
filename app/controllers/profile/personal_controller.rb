@@ -31,6 +31,30 @@ class Profile::PersonalController < ApplicationController
         redirect_to "/users/edit"
     end
 
+    def followees
+        @follows_as_follower = current_user.follows_as_follower.page(params[:page]).per(20)
+    end
+
+    def followers
+        @follows_as_followee = current_user.follows_as_followee.page(params[:page]).per(20)
+    end
+
+    def follow        
+        current_user.followees << User.find(params[:user_id])
+        redirect_back fallback_location: "/"
+    end
+
+    def unfollow
+        if params[:follow_record_id]
+            follow = Follow.find(params[:follow_record_id])
+            follow.destroy!
+        elsif params[:follower_id]
+            follow = Follow.where(followee_id: current_user.id, followee_id: params[:follower_id]).first
+            follow.destroy!
+        end
+        redirect_back fallback_location: "/"
+    end
+
 
     # --------------------------
     private
@@ -38,6 +62,7 @@ class Profile::PersonalController < ApplicationController
     def edit_params
         params.permit(:fname, :lname, :email)
     end
+
     def edit_avatar_params
         params[:avatar]
     end

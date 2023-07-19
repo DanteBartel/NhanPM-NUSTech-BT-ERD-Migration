@@ -17,12 +17,17 @@ Rails.application.routes.draw do
   get "/feeds/feeds_albums", to: "feeds#feeds_albums"
   get "/feeds/discover_albums", to: "feeds#discover_albums"
 
-  # Routes for profiles
+  # Routes for personal profiles
   put "/profile/edit", to: "profile/personal#edit"
   get "/profile/photos", to: "profile/personal#photos"
   get "/profile/albums", to: "profile/personal#albums"
   get "/profile/followees", to: "profile/personal#followees"
   get "/profile/followers", to: "profile/personal#followers"
+  delete "/profile/followees/:follow_record_id", to: "profile/personal#unfollow"
+  delete "/profile/followers/:follower_id", to: "profile/personal#unfollow"
+  post "/profile/followers/:user_id", to: "profile/personal#follow"
+
+  # Routes for public profiles
   get "/profile/:user_id/photos", to: "profile/public#photos"
   get "/profile/:user_id/albums", to: "profile/public#albums"
   get "/profile/:user_id/followees", to: "profile/public#followees"

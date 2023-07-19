@@ -37,20 +37,49 @@
 
         <!-- Inside the feed -->
         <div class="col-xl-8 mx-auto mt-3 bg-light row row-cols-1 justify-content-center">
-            <!-- navigator between photos, albums, followings and followers -->
-            <div class="py-2 d-flex justify-content-start">
-                <a type="button" class="btn btn-success border" href="/profile/photos">Photos</a>
-                <a type="button" class="btn btn-light border" href="/profile/albums">Albums</a>
-                <a type="button" class="btn btn-light border" href="new_photo.html">Followings</a>
-                <a type="button" class="btn btn-light border" href="new_photo.html">Followers</a>
-                <a type="button" class="btn btn-light border" href="/users/edit">Edit Profile</a>
+            <!-- Personal info -->
+            <div class="container-fluid">
+                <div class="row pt-2">
+                    <div class="col-auto">
+                        <% if current_user.avatar.representable? %>
+                            <%= image_tag current_user.avatar, class: "myPhotoItemImg" %>
+                        <% end %>
+                    </div>
+                    <div class="col-auto">
+                        <div>
+                            <a type="button" class="btn btn-light border" href="/users/edit">Edit Profile</a>
+                        </div>
+                        <div>
+                            <p class="fs-2 fw-bold">
+                                <%= current_user.fname.to_s + " " + current_user.lname.to_s %>
+                            </p>
+                        </div>
+                        <div>
+                            <a type="button" class="btn btn-success border" href="/profile/photos">
+                                <%= current_user.photos_count.to_s + " Photos" %>
+                            </a>
+                            <a type="button" class="btn btn-light border" href="/profile/albums">
+                                <%= current_user.albums_count.to_s + " Albums" %>
+                            </a>
+                            <a type="button" class="btn btn-light border" href="/profile/followees">
+                                <%= current_user.followees_count.to_s + " Followings" %>
+                            </a>
+                            <a type="button" class="btn btn-light border" href="/profile/followers">
+                                <%= current_user.followers_count.to_s + " Followers" %>
+                            </a>
+                        </div>
+                        <div class="py-2 d-flex justify-content-end">
+                            <a type="button" class="btn btn-primary border bg-success" href=<%= "/users/" + current_user.id.to_s + "/photos/new" %>>Add New Photo</a>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <!-- Buttons -->
-            <div class="py-2 d-flex justify-content-end">
-                <a type="button" class="btn btn-primary border bg-success" href=<%= "/users/" + current_user.id.to_s + "/photos/new" %>>Add New Photo</a>
-            </div>            
+            
             <!-- Horrizone line -->
-            <hr/>
+            <div></div>
+            <br>
+            <hr>
+
             <!-- List of My Photo items -->
             <div class="container-fluid">
                 <div class="row g-3">

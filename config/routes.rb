@@ -33,6 +33,10 @@ Rails.application.routes.draw do
   get "/profile/:user_id/followees", to: "profile/public#followees"
   get "/profile/:user_id/followers", to: "profile/public#followers"
 
+  # Routes for like and unlike photos / albums
+  post "/profile/like_photo/:photo_id", to: "profile/personal#like_photo"
+  delete "/profile/unlike_photo/:photo_id", to: "profile/personal#unlike_photo"
+
   # Routes for CRUD photos
   resources :users do
     resources :photos, only: [:new, :create]

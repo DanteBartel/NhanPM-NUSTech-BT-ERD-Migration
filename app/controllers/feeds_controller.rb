@@ -1,17 +1,17 @@
 class FeedsController < ApplicationController
     def feeds_photos        
-        # console.log(flash.any?)
-        if flash[:notice]
-            p flash[:notice]
-            redirect_to "/profile/edit"
-        end
+        
     end
-    def discover_photos
 
+    def discover_photos
+        @photos = Photo.includes(:like_photos).where(is_public: true)
+        
     end
+
     def feeds_albums
 
     end
+
     def discover_albums
 
     end

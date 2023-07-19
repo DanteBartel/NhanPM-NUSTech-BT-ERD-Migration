@@ -30,7 +30,7 @@ class PhotosController < ApplicationController
       redirect_to "/profile/photos"
     end
   end
-
+  
   # ----------------------------------------------------------------
   private
 
@@ -48,5 +48,5 @@ class PhotosController < ApplicationController
 
   def update_photo_image_params
     params[:image]
-  end
+  end  
 end

@@ -15,13 +15,13 @@
 /* Feed */
 .feed-item {
     background-color: rgb(242, 242, 242);
-    cursor: pointer;
 }
 .feed-item-picture {
     object-fit: cover;
     height: 150px;
     max-width: 150px;
     min-width: 150px;
+    cursor: pointer;
 }
 .feed-item-picture-modal {
     object-fit: cover;
@@ -36,6 +36,13 @@
 }
 .feed-item-footnote {
     font-size: 10px;
+}
+.feedHeartPicture {
+    object-fit: cover;
+    height: 15px;
+    max-width: 15px;
+    min-width: 15px;
+    cursor: pointer;
 }
 /* My Photo */
 .myPhotoItem {

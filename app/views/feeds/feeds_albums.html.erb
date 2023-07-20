@@ -45,147 +45,63 @@
             <div class="container">
                 <div class="row row-cols-1 row-cols-xl-2 g-2">
                     <!--  -->
-                    <div class="col">
-                        <div class="feed-item d-flex border shadow-sm" data-bs-toggle="modal" data-bs-target="#feedAlbumModal">
-                            <img src="/image/02.png" alt="png" class="feed-item-picture p-0">
-                            <div class="flex-grow-1 p-2 d-flex flex-column">
-                                <div class="d-flex align-items-center">
-                                    <div class="profile-picture-container bg-theme text-white me-2 ">
-                                        NP
+                    <% @albums.each do |al| %>
+
+                        <div class="col">
+                            <div class="feed-item d-flex border shadow-sm">
+                                <!-- Image -->
+                                <% if al.images[0].representable? %>
+                                    <%= image_tag al.images[0], class: "feed-item-picture p-0", data: {bs_toggle: "modal", bs_target: ("#feedAlbumModal_" + al.id.to_s)} %>
+                                <% else %>
+                                    <img alt="png" class="feed-item-picture p-0" data-bs-toggle="modal" data-bs-target="#feedModal">
+                                <% end %>
+                                <!-- info -->
+                                <div class="flex-grow-1 p-2 d-flex flex-column">
+                                    <!-- user name -->
+                                    <div class="d-flex align-items-center">
+                                        <div class="profile-picture-container bg-theme text-white me-2 ">
+                                            NP
+                                        </div>
+                                        <div class="color-theme">
+                                            <%= al.user.fname + " " + al.user.lname %>
+                                        </div>
                                     </div>
-                                    <div class="color-theme">Nhan Pham</div>
-                                </div>
-                                <div class="feed-item-title py-1">
-                                    Nam tempor posuere faucilub
-                                </div>
-                                <div class="feed-item-discription flex-grow-1">
-                                    Aliquam dictum nec massa ac consequat. Etiam dignissim tincidunt tellus sed vestibulum. Sed vitae vestibulum purus. Curabitur malesuada libero in nibh pretium, sed malesuada nisi feugiat.
-                                </div>
-                                <div class="feed-item-footnote text-end mt-1">16:01 01/04/2023</div>
-                            </div>
-                        </div>                                
-                    </div>
-                    <!--  -->
-                    <div class="col">
-                        <div class="feed-item d-flex border shadow-sm" data-bs-toggle="modal" data-bs-target="#feedAlbumModal">
-                            <img src="/image/03.png" alt="png" class="feed-item-picture p-0">
-                            <div class="flex-grow-1 p-2 d-flex flex-column">
-                                <div class="d-flex align-items-center">
-                                    <div class="profile-picture-container bg-theme text-white me-2 ">
-                                        NP
+                                    <!-- album title -->
+                                    <div class="feed-item-title py-1">
+                                        <%= al.title %>
                                     </div>
-                                    <div class="color-theme">Nhan Pham</div>
+                                    <!-- album description -->
+                                    <div class="feed-item-discription flex-grow-1">
+                                        <%= al.description %>
+                                    </div>
+                                    <!-- footer -->
+                                    <div class="d-flex justify-content-between mt-1">
+                                        <!-- Heart -->
+                                        <span>
+                                            <!-- Like/Unlike button -->
+                                            <% la = al.like_albums.where(user_id: current_user.id, album_id: al.id).first %>
+                                            <% if la then %>
+                                                <!-- Current user already like this album, so heart is red and action is dislike -->
+                                                <% heartSrouce = "/icon/heart-red.svg" %>
+                                                <%= link_to("/profile/unlike_album/" + al.id.to_s, method: :delete) do %><img src=<%= heartSrouce %> alt="..." class="feedHeartPicture p-0"><% end %>
+                                            <% else %>
+                                                <!-- Heart is empty and action is like -->
+                                                <% heartSrouce = "/icon/heart-blank.svg" %>
+                                                <%= link_to("/profile/like_album/" + al.id.to_s, method: :post) do %><img src=<%= heartSrouce %> alt="..." class="feedHeartPicture p-0"><% end %>
+                                            <% end %>                                            
+                                            <!-- Number of likes -->
+                                            <span class="feed-item-footnote">
+                                                <%= al.like_albums_count.nil? ? 0 : al.like_albums_count %>
+                                            </span>
+                                        </span>
+                                        <!-- Update time -->
+                                        <span class="feed-item-footnote"> <%= al.created_at %> </span>
+                                    </div>
                                 </div>
-                                <div class="feed-item-title py-1">
-                                    Nam tempor posuere faucilub
-                                </div>
-                                <div class="feed-item-discription flex-grow-1">
-                                    Aliquam dictum nec massa ac consequat. Etiam dignissim tincidunt tellus sed vestibulum. Sed vitae vestibulum purus. Curabitur malesuada libero in nibh pretium, sed malesuada nisi feugiat.
-                                </div>
-                                <div class="feed-item-footnote text-end mt-1">16:01 01/04/2023</div>
-                            </div>
+                            </div>                                
                         </div>
-                    </div>
-                    <div class="col">
-                        <div class="feed-item d-flex border shadow-sm" data-bs-toggle="modal" data-bs-target="#feedAlbumModal">
-                            <img src="/image/04.png" alt="png" class="feed-item-picture p-0">
-                            <div class="flex-grow-1 p-2 d-flex flex-column">
-                                <div class="d-flex align-items-center">
-                                    <div class="profile-picture-container bg-theme text-white me-2 ">
-                                        NP
-                                    </div>
-                                    <div class="color-theme">Nhan Pham</div>
-                                </div>
-                                <div class="feed-item-title py-1">
-                                    Nam tempor posuere faucilub
-                                </div>
-                                <div class="feed-item-discription flex-grow-1">
-                                    Aliquam dictum nec massa ac consequat. Etiam dignissim tincidunt tellus sed vestibulum. Sed vitae vestibulum purus. Curabitur malesuada libero in nibh pretium, sed malesuada nisi feugiat.
-                                </div>
-                                <div class="feed-item-footnote text-end mt-1">16:01 01/04/2023</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="feed-item d-flex border shadow-sm" data-bs-toggle="modal" data-bs-target="#feedAlbumModal">
-                            <img src="/image/05.png" alt="png" class="feed-item-picture p-0">
-                            <div class="flex-grow-1 p-2 d-flex flex-column">
-                                <div class="d-flex align-items-center">
-                                    <div class="profile-picture-container bg-theme text-white me-2 ">
-                                        NP
-                                    </div>
-                                    <div class="color-theme">Nhan Pham</div>
-                                </div>
-                                <div class="feed-item-title py-1">
-                                    Nam tempor posuere faucilub
-                                </div>
-                                <div class="feed-item-discription flex-grow-1">
-                                    Aliquam dictum nec massa ac consequat. Etiam dignissim tincidunt tellus sed vestibulum. Sed vitae vestibulum purus. Curabitur malesuada libero in nibh pretium, sed malesuada nisi feugiat.
-                                </div>
-                                <div class="feed-item-footnote text-end mt-1">16:01 01/04/2023</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="feed-item d-flex border shadow-sm" data-bs-toggle="modal" data-bs-target="#feedAlbumModal">
-                            <img src="/image/06.png" alt="png" class="feed-item-picture p-0">
-                            <div class="flex-grow-1 p-2 d-flex flex-column">
-                                <div class="d-flex align-items-center">
-                                    <div class="profile-picture-container bg-theme text-white me-2 ">
-                                        NP
-                                    </div>
-                                    <div class="color-theme">Nhan Pham</div>
-                                </div>
-                                <div class="feed-item-title py-1">
-                                    Nam tempor posuere faucilub
-                                </div>
-                                <div class="feed-item-discription flex-grow-1">
-                                    Aliquam dictum nec massa ac consequat. Etiam dignissim tincidunt tellus sed vestibulum. Sed vitae vestibulum purus. Curabitur malesuada libero in nibh pretium, sed malesuada nisi feugiat.
-                                </div>
-                                <div class="feed-item-footnote text-end mt-1">16:01 01/04/2023</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="feed-item d-flex border shadow-sm" data-bs-toggle="modal" data-bs-target="#feedAlbumModal">
-                            <img src="/image/06.png" alt="png" class="feed-item-picture p-0">
-                            <div class="flex-grow-1 p-2 d-flex flex-column">
-                                <div class="d-flex align-items-center">
-                                    <div class="profile-picture-container bg-theme text-white me-2 ">
-                                        NP
-                                    </div>
-                                    <div class="color-theme">Nhan Pham</div>
-                                </div>
-                                <div class="feed-item-title py-1">
-                                    Nam tempor posuere faucilub
-                                </div>
-                                <div class="feed-item-discription flex-grow-1">
-                                    Aliquam dictum nec massa ac consequat. Etiam dignissim tincidunt tellus sed vestibulum. Sed vitae vestibulum purus. Curabitur malesuada libero in nibh pretium, sed malesuada nisi feugiat.
-                                </div>
-                                <div class="feed-item-footnote text-end mt-1">16:01 01/04/2023</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="feed-item d-flex border shadow-sm" data-bs-toggle="modal" data-bs-target="#feedAlbumModal">
-                            <img src="/image/06.png" alt="png" class="feed-item-picture p-0">
-                            <div class="flex-grow-1 p-2 d-flex flex-column">
-                                <div class="d-flex align-items-center">
-                                    <div class="profile-picture-container bg-theme text-white me-2 ">
-                                        NP
-                                    </div>
-                                    <div class="color-theme">Nhan Pham</div>
-                                </div>
-                                <div class="feed-item-title py-1">
-                                    Nam tempor posuere faucilub
-                                </div>
-                                <div class="feed-item-discription flex-grow-1">
-                                    Aliquam dictum nec massa ac consequat. Etiam dignissim tincidunt tellus sed vestibulum. Sed vitae vestibulum purus. Curabitur malesuada libero in nibh pretium, sed malesuada nisi feugiat.
-                                </div>
-                                <div class="feed-item-footnote text-end mt-1">16:01 01/04/2023</div>
-                            </div>
-                        </div>
-                    </div>
+
+                    <% end %>
                 </div>
             </div>
 
@@ -210,43 +126,42 @@
 
 
 <!-- Feed item modal -->
-<div class="modal modal-center fade" id="feedAlbumModal" tabindex="-1" aria-labelledby="feedAlbumModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="feedAlbumModalLabel">
-                    Nam tempor posuere faucilub
-                </h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="container-fluid text-center">                            
-                    <div id="carouselFeedAlbumControls" class="carousel slide" data-bs-ride="carousel">
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <img src="/image/02.png" class="d-block feed-item-picture-modal" alt="...">
+<% @albums.each do |al| %>
+    <div class="modal modal-center fade" id=<%= "feedAlbumModal_" + al.id.to_s %> tabindex="-1" aria-labelledby="feedAlbumModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="feedAlbumModalLabel">
+                        <%= al.title %>
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid text-center">                            
+                        <div id="carouselFeedAlbumControls" class="carousel slide" data-bs-ride="carousel">
+                            <div class="carousel-inner">
+                                <!-- Images inside modal -->
+                                <% al.images.each_with_index do |img, idx| %>
+                                    <div class="carousel-item <%= idx==0? "active" : "" %>">
+                                        <%= image_tag img, class: "d-block feed-item-picture-modal" %>
+                                    </div>
+                                <% end %>
                             </div>
-                            <div class="carousel-item">
-                                <img src=/image/03.png" class="d-block feed-item-picture-modal" alt="...">
-                            </div>
-                            <div class="carousel-item">
-                                <img src="/image/04.png" class="d-block feed-item-picture-modal" alt="...">
-                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselFeedAlbumControls" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carouselFeedAlbumControls" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
                         </div>
-                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselFeedAlbumControls" data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Previous</span>
-                        </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#carouselFeedAlbumControls" data-bs-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Next</span>
-                        </button>
                     </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                Aliquam dictum nec massa ac consequat. Etiam dignissim tincidunt tellus sed vestibulum. Sed vitae vestibulum purus. Curabitur malesuada libero in nibh pretium, sed malesuada nisi feugiat.
+                <div class="modal-footer">
+                    <%= al.description %>
+                </div>
             </div>
         </div>
     </div>
-</div>
+<% end %>

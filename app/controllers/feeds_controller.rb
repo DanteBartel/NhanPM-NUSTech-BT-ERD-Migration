@@ -4,8 +4,7 @@ class FeedsController < ApplicationController
     end
 
     def discover_photos
-        @photos = Photo.includes(:like_photos).where(is_public: true)
-        
+        @photos = Photo.includes(:like_photos).where(is_public: true).order(created_at: :desc)
     end
 
     def feeds_albums
@@ -13,6 +12,6 @@ class FeedsController < ApplicationController
     end
 
     def discover_albums
-
+        @albums = Album.includes(:like_albums).where(is_public: true).order(created_at: :desc)
     end
 end

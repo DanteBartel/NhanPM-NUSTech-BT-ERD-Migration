@@ -66,6 +66,17 @@ class Profile::PersonalController < ApplicationController
         redirect_back fallback_location: "/"
     end
 
+    def like_album
+        current_user.like_albums.create(album_id_params)
+        redirect_back fallback_location: "/"
+    end
+
+    def unlike_album
+        like_album = LikeAlbum.where(user_id: current_user.id, album_id: params[:album_id])
+        current_user.like_albums.destroy(like_album)
+        redirect_back fallback_location: "/"
+    end
+
 
     # --------------------------
     private
@@ -80,5 +91,9 @@ class Profile::PersonalController < ApplicationController
 
     def photo_id_params
         params.permit(:photo_id)
+    end
+
+    def album_id_params
+        params.permit(:album_id)
     end
 end

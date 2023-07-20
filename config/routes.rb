@@ -36,6 +36,8 @@ Rails.application.routes.draw do
   # Routes for like and unlike photos / albums
   post "/profile/like_photo/:photo_id", to: "profile/personal#like_photo"
   delete "/profile/unlike_photo/:photo_id", to: "profile/personal#unlike_photo"
+  post "/profile/like_album/:album_id", to: "profile/personal#like_album"
+  delete "/profile/unlike_album/:album_id", to: "profile/personal#unlike_album"
 
   # Routes for CRUD photos
   resources :users do

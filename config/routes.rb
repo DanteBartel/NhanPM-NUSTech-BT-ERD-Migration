@@ -9,9 +9,8 @@ Rails.application.routes.draw do
 
   # routes for directing to passthrough controller after login
   get "/passthrough/index", to: "passthrough#index"
-  get "/temps/manage_photo", to: "temps#manage_photo"
   namespace :admin do
-    resources :photos, :albums
+    resources :photos, :albums, :users
   end
 
   # Routes for the feeds

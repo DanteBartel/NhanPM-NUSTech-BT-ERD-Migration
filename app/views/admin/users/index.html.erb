@@ -1,0 +1,91 @@
+<nav class="head-navigation-bar bg-theme navbar navbar-expand-sm py-1 sticky-top">
+    <div class="container-fluid justify-content-start">
+        <a class="navigation-bar-logo col-4 col-xl-2 px-1 px-xl-4 text-start text-xl-end" href="#">Fotobook Admin</a>
+        <div class="me-auto py-1 order-4 order-xl-2">
+            <input type="search" placeholder="Search Photo / Album">
+        </div>
+        
+        <a class="navigation-bar-profile d-flex align-items-center py-1 ms-auto ms-xl-0 me-3 me-xl-5 order-2 order-xl-3" href="#">
+            <div class="profile-picture-container bg-light color-theme me-2">
+                NP
+            </div>
+            <div>Nhan Pham</div>
+        </a>
+        <a class="navigation-bar-inout pe-2 order-3 order-xl-4" href="login.html">Logout</a>
+        <button class="btn border order-5 d-xl-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapSideBar" aria-expanded="false" aria-controls="collapSideBar">
+            <img src="/icon/menu-2-white.svg" alt="menu-icon">
+        </button>                
+    </div>
+</nav>
+
+        
+
+<div class="main-background container-fluid">
+    <div class="row pb-2">
+
+        <!-- Side bar -->
+        <div class="sideBar col-xl-2 mt-xl-3 d-xl-block position-fixed collapse bg-theme01" id="collapSideBar">
+            <div class="d-flex flex-column align-items-center">
+                <div class="py-2">
+                    <%= link_to "Manage Photos", "/admin/photos", method: :get, class: "feed-sidebar-item deactive-page nav-link p-1" %>
+                    <%= link_to "Manage Albums", "/admin/albums", method: :get, class: "feed-sidebar-item deactive-page nav-link p-1" %>
+                    <%= link_to "Manage Users", "/admin/users", method: :get, class: "feed-sidebar-item active-page nav-link p-1" %>
+                </div>                        
+            </div>                    
+        </div>
+
+
+        <!-- Inside the feed -->
+        <div class="col-xl-8 mx-auto mt-3 bg-light row row-cols-1 justify-content-center">
+            <!-- List of My Photo items -->
+            <div class="container-fluid mt-3">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">First Name</th>
+                            <th scope="col">Last Name</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Last Login</th>
+                            <th scope="col"> </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% @users.each do |user| %>
+                            <tr>
+                                <td><%= user.fname %></td>
+                                <td><%= user.lname %></td>
+                                <td><%= user.email %></td>
+                                <td>Last login</td>
+                                <td>
+                                    <%= link_to "Edit", "#", method: :get, class: "btn btn-success" %>
+                                    <%= link_to "Delete", "#", method: :delete, class: "btn btn-danger" %>
+                                </td>
+                            </tr>
+                        <% end %>
+                    </tbody>
+                </table>
+            </div>
+
+            
+            <!-- Pagination -->
+            <div>
+                <ul class="pagination justify-content-center mb-0 py-2">
+                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                </ul>
+            </div>
+
+            
+
+            <br>
+            
+
+
+        </div>
+    </div>
+</div>
+
+

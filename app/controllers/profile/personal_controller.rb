@@ -15,16 +15,12 @@ class Profile::PersonalController < ApplicationController
         user.update!(edit_params)        
         # Edit avatar
         if params[:avatar]
-            p "========= there is params avatar"
             if user.avatar.attached?
                 user.avatar.purge
             end
             user.avatar.attach(params[:avatar])
-        else
-            p "========= there is no params avatar"
-            p params[:clearAvatar].to_i
+        else            
             if params[:clearAvatar].to_i == 1
-                p "================================ the params clearAvatar is true"
                 user.avatar.purge
             end
         end

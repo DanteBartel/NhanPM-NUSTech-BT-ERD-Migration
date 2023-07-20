@@ -6,7 +6,7 @@ class PassthroughController < ApplicationController
             when 'user'
                 "/feeds/feeds_photos"
             when 'admin'
-                "/temps/manage_photo"
+                "/admin/photos"
         end  
         redirect_to path
     end

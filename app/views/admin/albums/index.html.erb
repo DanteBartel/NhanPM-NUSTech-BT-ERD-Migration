@@ -1,6 +1,6 @@
 <nav class="head-navigation-bar bg-theme navbar navbar-expand-sm py-1 sticky-top">
     <div class="container-fluid justify-content-start">
-        <a class="navigation-bar-logo col-4 col-xl-2 px-1 px-xl-4 text-start text-xl-end" href="#">Fotobook</a>
+        <a class="navigation-bar-logo col-4 col-xl-2 px-1 px-xl-4 text-start text-xl-end" href="#">Fotobook Admin</a>
         <div class="me-auto py-1 order-4 order-xl-2">
             <input type="search" placeholder="Search Photo / Album">
         </div>
@@ -27,9 +27,9 @@
         <div class="sideBar col-xl-2 mt-xl-3 d-xl-block position-fixed collapse bg-theme01" id="collapSideBar">
             <div class="d-flex flex-column align-items-center">
                 <div class="py-2">
-                    <a class="feed-sidebar-item deactive-page nav-link p-1" href="feed.html">Feeds</a>
-                    <a class="feed-sidebar-item deactive-page nav-link p-1" href="my_photo.html">My photos</a>
-                    <a class="feed-sidebar-item active-page nav-link p-1" href="#">My albums</a>                            
+                    <%= link_to "Manage Photos", "/admin/photos", method: :get, class: "feed-sidebar-item deactive-page nav-link p-1" %>
+                    <%= link_to "Manage Albums", "/admin/albums", method: :get, class: "feed-sidebar-item active-page nav-link p-1" %>
+                    <%= link_to "Manage Users", "/admin/users", method: :get, class: "feed-sidebar-item deactive-page nav-link p-1" %>
                 </div>                        
             </div>                    
         </div>
@@ -37,51 +37,8 @@
 
         <!-- Inside the feed -->
         <div class="col-xl-8 mx-auto mt-3 bg-light row row-cols-1 justify-content-center">
-            <!-- Personal info -->
-            <div class="container-fluid">
-                <div class="row pt-2">
-                    <div class="col-auto">
-                        <% if current_user.avatar.representable? %>
-                            <%= image_tag current_user.avatar, class: "myPhotoItemImg" %>
-                        <% end %>
-                    </div>
-                    <div class="col-auto">
-                        <div>
-                            <a type="button" class="btn btn-light border" href="/users/edit">Edit Profile</a>
-                        </div>
-                        <div>
-                            <p class="fs-2 fw-bold">
-                                <%= current_user.fname.to_s + " " + current_user.lname.to_s %>
-                            </p>
-                        </div>
-                        <div>
-                            <a type="button" class="btn btn-light border" href="/profile/photos">
-                                <%= current_user.photos_count.to_s + " Photos" %>
-                            </a>
-                            <a type="button" class="btn btn-success border" href="/profile/albums">
-                                <%= current_user.albums_count.to_s + " Albums" %>
-                            </a>
-                            <a type="button" class="btn btn-light border" href="/profile/followees">
-                                <%= current_user.followees_count.to_s + " Followings" %>
-                            </a>
-                            <a type="button" class="btn btn-light border" href="/profile/followers">
-                                <%= current_user.followers_count.to_s + " Followers" %>
-                            </a>
-                        </div>
-                        <div class="py-2 d-flex justify-content-end">
-                            <a type="button" class="btn btn-primary border bg-success" href=<%= "/users/" + current_user.id.to_s + "/albums/new" %>>Add New Album</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Horrizone line -->
-            <div></div>
-            <br>
-            <hr>
-
             <!-- List of My Photo items -->
-            <div class="container-fluid">
+            <div class="container-fluid mt-3">
                 <div class="row g-3">
                     <% @albums.each do |al| %>
                         <div class="col-auto">
@@ -116,7 +73,6 @@
                 </div>
             </div>
 
-
             
             <!-- Pagination -->
             <div>
@@ -128,7 +84,14 @@
                     <li class="page-item"><a class="page-link" href="#">Next</a></li>
                 </ul>
             </div>
+
+            <div>
+                <%= paginate @albums %>
+            </div>
+
+            <br>
             
+
 
         </div>
     </div>
@@ -175,5 +138,3 @@
         </div>
     </div>
 <% end %>
-
-

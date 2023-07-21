@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :photos, :albums, :users
   end
+  delete "/admin/albums/:album_id/image/:image_id", to: "admin/albums#dropImage"
 
   # Routes for the feeds
   get "/feeds/feeds_photos", to: "feeds#feeds_photos"

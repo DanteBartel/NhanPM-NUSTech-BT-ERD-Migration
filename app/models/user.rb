@@ -23,7 +23,7 @@ class User < ApplicationRecord
     has_many :followees, through: :follows_as_follower, source: :followee
 
     # Additional components for devise gem
-    devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable
+    devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable, :trackable
 
     # Using active storage for avatar
     has_one_attached :avatar

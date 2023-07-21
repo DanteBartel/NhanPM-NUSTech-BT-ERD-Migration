@@ -1,0 +1,103 @@
+<nav class="head-navigation-bar bg-theme navbar navbar-expand-sm py-1 sticky-top">
+    <div class="container-fluid justify-content-start">
+        <a class="navigation-bar-logo col-4 col-xl-2 px-1 px-xl-4 text-start text-xl-end" href="#">Fotobook</a>
+        <div class="me-auto py-1 order-4 order-xl-2">
+            <input type="search" placeholder="Search Photo / Album">
+        </div>
+        
+        <a class="navigation-bar-profile d-flex align-items-center py-1 ms-auto ms-xl-0 me-3 me-xl-5 order-2 order-xl-3" href="#">
+            <div class="profile-picture-container bg-light color-theme me-2">
+                NP
+            </div>
+            <div>Nhan Pham</div>
+        </a>
+        <a class="navigation-bar-inout pe-2 order-3 order-xl-4" href="login.html">Logout</a>
+        <button class="btn border order-5 d-xl-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapSideBar" aria-expanded="false" aria-controls="collapSideBar">
+            <img src="/icon/menu-2-white.svg" alt="menu-icon">
+        </button>                
+    </div>
+</nav>
+
+        
+
+<div class="main-background container-fluid">
+    <div class="row pb-2">
+
+        <!-- Side bar -->
+        <div class="sideBar col-xl-2 mt-xl-3 d-xl-block position-fixed collapse bg-theme01" id="collapSideBar">
+            <div class="d-flex flex-column align-items-center">
+                <div class="py-2">
+                    <%= link_to "Manage Photos", "/admin/photos", method: :get, class: "feed-sidebar-item active-page nav-link p-1" %>
+                    <%= link_to "Manage Albums", "/admin/albums", method: :get, class: "feed-sidebar-item deactive-page nav-link p-1" %>
+                    <%= link_to "Manage Users", "/admin/users", method: :get, class: "feed-sidebar-item deactive-page nav-link p-1" %>
+                </div>                        
+            </div>                    
+        </div>
+
+
+        <!-- Inside the feed -->
+        <div class="col-xl-8 pb-2 mx-auto mt-3 bg-light row row-cols-1 justify-content-center">
+            <!-- Statement and button -->
+            <div class="py-2 d-flex justify-content-start">
+                <div class="d-flex align-items-center">
+                    <strong>Edit Photo</strong>
+                </div>
+                <%= link_to "Back", "/admin/photos", type: "button", class: "btn btn-primary ms-auto border bg-theme" %>
+            </div>
+            <!-- Horrizone line -->
+            <hr/>
+            <!-- List of inputs -->
+            <div class="container-fluid">
+                
+                
+                <%= form_with(url: "/admin/photos/" + @photo.id.to_s, method: :put, class: "row g-3") do |f| %>
+
+                    <!-- Basic info -->
+                    <div class="col-12 col-xl-6">
+                        <div>Title</div>
+                        <%= text_field_tag "title", @photo.title, class: "form-control", placeholder: "Photo Title", required: true, autofocus: true %>
+                        <div>Sharing mode</div>
+                        <%= select_tag "is_public", options_for_select([["Public", true], ["Private", false]], @photo.is_public), class: "form-select" %>
+                    </div>
+
+
+                    <div class="col-12 col-xl-6">
+                        <div>Description</div>
+                        <%= text_area_tag "description", @photo.description, class: "form-control", rows: "4", placeholder: "Photo Description", required: true %>
+                    </div>
+
+
+                    <!-- Photo -->
+                    <div class="col-12">
+                        <div class="newPhotoReviewZone d-flex justify-content-center align-items-center bg-theme01" data-controller="edit-photo-preview" onclick="document.getElementById('selectedFile').click();">
+                            
+                            <div class="d-none" data-edit-photo-preview-target="previewSection">
+                                <img class="newPhotoReviewZone" alt="..." data-edit-photo-preview-target="imagePreview"/>
+                            </div>
+
+                            <% if @photo.image.representable? %>
+                                <%= image_tag @photo.image, class: "newPhotoReviewZone", data: {edit_photo_preview_target: "initImage"} %>
+                            <% end %>
+
+                            <%= f.file_field :image, data: {edit_photo_preview_target: "imageUploader", action: "edit-photo-preview#updatePreview"}, id: "selectedFile", class: "d-none" %>
+
+                        </div>
+                    </div>
+
+
+                    <!-- Submit and delete buttons -->
+                    <div class="col-12 actions">
+                        <%= submit_tag "Save", class: "btn btn-primary btn-block bg-theme" %>
+                        <%= link_to "Delete", "/admin/photos/" + @photo.id.to_s, method: "delete", class: "btn btn-danger btn-block" %>
+                    </div>
+
+
+
+
+                <% end %>
+            </div>
+
+
+        </div>
+    </div>
+</div>

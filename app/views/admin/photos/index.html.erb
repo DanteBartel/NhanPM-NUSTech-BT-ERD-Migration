@@ -30,7 +30,7 @@
                     <%= link_to "Manage Photos", "/admin/photos", method: :get, class: "feed-sidebar-item active-page nav-link p-1" %>
                     <%= link_to "Manage Albums", "/admin/albums", method: :get, class: "feed-sidebar-item deactive-page nav-link p-1" %>
                     <%= link_to "Manage Users", "/admin/users", method: :get, class: "feed-sidebar-item deactive-page nav-link p-1" %>
-                </div>                        
+                </div>
             </div>                    
         </div>
 
@@ -50,10 +50,12 @@
 
                                 <!-- Header -->
                                 <div class="myPhotoItemHeader position-absolute top-0 d-flex align-items-center">
+                                    <!-- Title -->
                                     <div class="text-white px-2">
                                         <%= pho.title %>
                                     </div>
-                                    <a class="ms-auto me-1" href=<%= "/photos/" + pho.id.to_s + "/edit" %>>
+                                    <!-- Edit button -->
+                                    <a class="ms-auto me-1" href=<%= "/admin/photos/" + pho.id.to_s + "/edit" %>>
                                         <img class="myPhotoItemEditIcon" src="/icon/edit-button-white.svg" alt="...">
                                     </a>                                
                                 </div>

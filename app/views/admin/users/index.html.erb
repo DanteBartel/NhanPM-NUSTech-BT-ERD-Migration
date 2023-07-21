@@ -57,7 +57,7 @@
                                 <td><%= user.email %></td>
                                 <td><%= user.last_sign_in_at %></td>
                                 <td>
-                                    <%= link_to "Edit", "#", method: :get, class: "btn btn-success" %>
+                                    <%= link_to "Edit", "/admin/users/" + user.id.to_s + "/edit", method: :get, class: "btn btn-success" %>
                                     <%= link_to "Delete", "#", method: :delete, class: "btn btn-danger" %>
                                 </td>
                             </tr>

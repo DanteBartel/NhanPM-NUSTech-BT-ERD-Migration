@@ -14,7 +14,7 @@ class User < ApplicationRecord
     has_many :photos, dependent: :destroy
     has_many :albums, dependent: :destroy
     has_many :like_photos, dependent: :destroy
-    has_many :like_albums, dependent: :destroy    
+    has_many :like_albums, dependent: :destroy
 
     # The associations to handle following relationships
     has_many :follows_as_follower, class_name: "Follow", foreign_key: "follower_id", dependent: :destroy
@@ -27,6 +27,12 @@ class User < ApplicationRecord
 
     # Using active storage for avatar
     has_one_attached :avatar
+
+    # Check for active state to ban from signing in
+    def active_for_authentication?
+        super
+        self.is_active
+    end
 
     # Note: remember the max length of password is 64
 end

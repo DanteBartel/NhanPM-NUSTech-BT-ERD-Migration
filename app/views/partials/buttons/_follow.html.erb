@@ -2,6 +2,7 @@
     <!-- No one log in so canoot follow anyone -->
 <% elsif user_id == current_user.id %>
     <!-- This is the current user. Cannot follow yourself -->
+    <span>(Me)</span>
 <% elsif followers.exists?(current_user.id) %>
     <%= link_to "Following", "/profile/unfollow/" + user_id.to_s, method: :delete, class: "btn btn-success border" %>
 <% else %>

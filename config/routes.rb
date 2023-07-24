@@ -55,13 +55,4 @@ Rails.application.routes.draw do
   resources :albums, only: [:edit, :update, :destroy]
   delete "/albums/:album_id/image/:image_id", to: "albums#dropImage"
 
-  # temps route when first init this project
-  # get "/temps/signup", to: "temps#signup"
-  # get "/temps/login", to: "temps#login"
-  # get "/temps/feed", to: "temps#feed"
-  # get "/temps/feed_album", to: "temps#feed_album"
-  # get "/temps/my_photo", to: "temps#my_photo"
-  # get "/temps/my_album", to: "temps#my_album"
-  # get "/temps/new_photo", to: "temps#new_photo"
-  # get "/temps/edit_photo", to: "temps#edit_photo"
 end

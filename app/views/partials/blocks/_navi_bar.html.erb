@@ -1,0 +1,42 @@
+<% if user_signed_in? %>
+    <% if current_user.is_admin %>
+        <% logo_content = "Fotobook Admin" %>
+    <% else %>
+        <% logo_content = "Fotobook" %>
+    <% end %>
+    <% user_name = current_user.fname + " " + current_user.lname %>
+    <% inout_content = "Logout" %>
+    <% inout_path = "/users/sign_out" %>
+    <% inout_method = :delete %>
+<% else %>
+    <% logo_content = "Fotobook" %>
+    <% user_name = "Guest" %>
+    <% inout_content = "Login" %>
+    <% inout_path = "/users/sign_in" %>
+    <% inout_method = :get %>
+<% end %>
+
+<!-- ##################################### -->
+<nav class="head-navigation-bar bg-theme navbar navbar-expand-sm py-1 sticky-top">
+    <div class="container-fluid justify-content-start">
+        <!-- Logo -->        
+        <%= link_to logo_content, "/passthrough/index", method: :get, class: "navigation-bar-logo col-4 col-xl-2 px-1 px-xl-4 text-start text-xl-end" %>
+        <!-- Search bar -->
+        <div class="me-auto py-1 order-4 order-xl-2">
+            <input type="search" placeholder="Search Photo / Album">
+        </div>
+        <!-- profile -->
+        <a class="navigation-bar-profile d-flex align-items-center py-1 ms-auto ms-xl-0 me-3 me-xl-5 order-2 order-xl-3" href="/profile/photos">
+            <div class="profile-picture-container bg-light color-theme me-2">
+                NP
+            </div>
+            <div><%= user_name %></div>
+        </a>
+        <!-- Log in / Log out -->
+        <%= link_to inout_content, inout_path, method: inout_method, class: "navigation-bar-inout pe-2 order-3 order-xl-4" %>
+        <!-- Collapse side bar button -->
+        <button class="btn border order-5 d-xl-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapSideBar" aria-expanded="false" aria-controls="collapSideBar">
+            <img src="/icon/menu-2-white.svg" alt="menu-icon">
+        </button>                
+    </div>
+</nav>

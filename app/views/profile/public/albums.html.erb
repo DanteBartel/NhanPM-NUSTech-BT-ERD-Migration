@@ -1,0 +1,172 @@
+<nav class="head-navigation-bar bg-theme navbar navbar-expand-sm py-1 sticky-top">
+    <div class="container-fluid justify-content-start">
+        <a class="navigation-bar-logo col-4 col-xl-2 px-1 px-xl-4 text-start text-xl-end" href="#">Fotobook</a>
+        <div class="me-auto py-1 order-4 order-xl-2">
+            <input type="search" placeholder="Search Photo / Album">
+        </div>
+        
+        <a class="navigation-bar-profile d-flex align-items-center py-1 ms-auto ms-xl-0 me-3 me-xl-5 order-2 order-xl-3" href="#">
+            <div class="profile-picture-container bg-light color-theme me-2">
+                NP
+            </div>
+            <div>Nhan Pham</div>
+        </a>
+        <a class="navigation-bar-inout pe-2 order-3 order-xl-4" href="login.html">Logout</a>
+        <button class="btn border order-5 d-xl-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapSideBar" aria-expanded="false" aria-controls="collapSideBar">
+            <img src="/icon/menu-2-white.svg" alt="menu-icon">
+        </button>                
+    </div>
+</nav>
+
+        
+
+<div class="main-background container-fluid">
+    <div class="row pb-2">
+
+        <!-- Side bar -->
+        <div class="sideBar col-xl-2 mt-xl-3 d-xl-block position-fixed collapse bg-theme01" id="collapSideBar">
+            <div class="d-flex flex-column align-items-center">
+                <div class="py-2">
+                    <a class="feed-sidebar-item deactive-page nav-link p-1" href="/feeds/feeds_photos">Feeds</a>
+                    <a class="feed-sidebar-item deactive-page nav-link p-1" href="/feeds/discover_photos">Discover</a>
+                </div>                        
+            </div>                    
+        </div>
+
+
+        <!-- Inside the feed -->
+        <div class="col-xl-8 mx-auto mt-3 bg-light row row-cols-1 justify-content-center">
+            <!-- Personal info -->
+            <div class="container-fluid">
+                <div class="row pt-2">
+                    <div class="col-auto">
+                        <% if @user.avatar.representable? %>
+                            <%= image_tag @user.avatar, class: "myPhotoItemImg" %>
+                        <% end %>
+                    </div>
+                    <div class="col-auto">
+                        <div>
+                            <a type="button" class="btn btn-light border" href="#">Follow</a>
+                        </div>
+                        <div>
+                            <p class="fs-2 fw-bold">
+                                <%= @user.fname.to_s + " " + @user.lname.to_s %>
+                            </p>
+                        </div>
+                        <div>
+                            <a type="button" class="btn btn-light border" href=<%= "/profile/" + @user.id.to_s + "/photos" %>>
+                                <%= @user.photos_count.to_s + " Photos" %>
+                            </a>
+                            <a type="button" class="btn btn-success border" href=<%= "/profile/" + @user.id.to_s + "/albums" %>>
+                                <%= @user.albums_count.to_s + " Albums" %>
+                            </a>
+                            <a type="button" class="btn btn-light border" href=<%= "/profile/" + @user.id.to_s + "/followees" %>>
+                                <%= @user.followees_count.to_s + " Followings" %>
+                            </a>
+                            <a type="button" class="btn btn-light border" href=<%= "/profile/" + @user.id.to_s + "/followers" %>>
+                                <%= @user.followers_count.to_s + " Followers" %>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Horrizone line -->
+            <div></div>
+            <br>
+            <hr>
+
+            <!-- List of My Photo items -->
+            <div class="container-fluid">
+                <div class="row g-3">
+                    <% @albums.each do |al| %>
+                        <div class="col-auto">
+                            <div class="myPhotoItem position-relative">
+                                <!-- Image -->
+                                <% if al.images[0].representable? %>
+                                    <%= image_tag al.images[0], class: "myPhotoItemImg", data: {bs_toggle: "modal", bs_target: "#feedAlbumModal_" + al.id.to_s} do %>
+                                    <% end %>
+                                <% end %>
+
+                                <!-- Header -->
+                                <div class="myPhotoItemHeader position-absolute top-0 d-flex align-items-center">
+                                    <div class="text-white px-2">
+                                        <%= al.title %>
+                                    </div>
+                                </div>
+
+                                <!-- Lock icon -->
+                                <% if not al.is_public %>
+                                    <div class="position-absolute p-2 bottom-0 end-0">
+                                        <div class="d-flex p-1 bg-light rounded-circle">
+                                            <img class="myPhotoItemLockIcon" src="/icon/lock.svg" alt="...">
+                                        </div>
+                                    </div>
+                                <% end %>                                
+                            </div>
+                        </div>
+                    <% end %>
+                </div>
+            </div>
+
+
+            
+            <!-- Pagination -->
+            <div>
+                <ul class="pagination justify-content-center mb-0 py-2">
+                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                </ul>
+            </div>
+            
+
+        </div>
+    </div>
+</div>
+
+
+<!-- Feed item modal -->
+<% @albums.each do |al| %>
+    <div class="modal modal-center fade" id=<%= "feedAlbumModal_" + al.id.to_s %> tabindex="-1" aria-labelledby="feedAlbumModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="feedAlbumModalLabel">
+                        <%= al.title %>
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid text-center">                            
+                        <div id="carouselFeedAlbumControls" class="carousel slide" data-bs-ride="carousel">
+                            <div class="carousel-inner">
+                                <!-- Images inside modal -->
+                                <% al.images.each_with_index do |img, idx| %>
+                                    <div class="carousel-item <%= idx==0? "active" : "" %>">
+                                        <%= image_tag img, class: "d-block feed-item-picture-modal" %>
+                                    </div>
+                                <% end %>
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselFeedAlbumControls" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carouselFeedAlbumControls" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <%= al.description %>
+                </div>
+            </div>
+        </div>
+    </div>
+<% end %>
+
+

@@ -1,4 +1,4 @@
-/* Global set up */
+/* Global set up color */
 .bg-theme {
     background-color: rgb(60,90,154);
 }
@@ -53,4 +53,7 @@ div.profile-picture-container {
 .hero-text-font {
     font-size: xx-large;
     font-weight: 700;
+}
+.profileLink {
+    text-decoration: none;
 }

@@ -11,6 +11,14 @@ class PassthroughController < ApplicationController
         redirect_to path
     end
 
+    def go_to_public_profile
+        if params[:id].to_i == current_user.id
+            redirect_to "/profile/photos"
+        else
+            redirect_to "/profile/" + params[:id] + "/photos"
+        end
+    end
+
     private
 
     def current_user_role

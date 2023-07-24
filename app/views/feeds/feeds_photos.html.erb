@@ -58,14 +58,14 @@
                                 <!-- info -->
                                 <div class="flex-grow-1 p-2 d-flex flex-column">
                                     <!-- user name -->
-                                    <div class="d-flex align-items-center">
+                                    <%= link_to("/passthrough/go_to_public_profile/" + pho.user_id.to_s, method: :get, class: "d-flex align-items-center profileLink") do %>
                                         <div class="profile-picture-container bg-theme text-white me-2 ">
                                             NP
                                         </div>
                                         <div class="color-theme">
                                             <%= pho.user.fname + " " + pho.user.lname %>
                                         </div>
-                                    </div>
+                                    <% end %>
                                     <!-- photo title -->
                                     <div class="feed-item-title py-1">
                                         <%= pho.title %>

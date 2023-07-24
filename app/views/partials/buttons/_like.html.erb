@@ -1,0 +1,9 @@
+<% if liked then %>
+    <!-- Current user already like this object, so heart is red and action is dislike -->
+    <% heartSrouce = "/icon/heart-red.svg" %>
+    <%= link_to("/profile/unlike_" + object_type + "/" + object_id.to_s, method: :delete) do %><img src=<%= heartSrouce %> alt="..." class="feedHeartPicture p-0"><% end %>
+<% else %>
+    <!-- Heart is empty and action is like -->
+    <% heartSrouce = "/icon/heart-blank.svg" %>
+    <%= link_to("/profile/like_" + object_type + "/" + object_id.to_s, method: :post) do %><img src=<%= heartSrouce %> alt="..." class="feedHeartPicture p-0"><% end %>
+<% end %>

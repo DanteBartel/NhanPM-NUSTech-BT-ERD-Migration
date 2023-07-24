@@ -1,0 +1,13 @@
+<% if user_signed_in? %>
+    <% if current_user.is_admin %>
+        <%= link_to "Manage Photos", "/admin/photos", method: :get, class: "feed-sidebar-item nav-link p-1 " + (tab == "photos" ? "active-page" : "deactive-page") %>
+        <%= link_to "Manage Albums", "/admin/albums", method: :get, class: "feed-sidebar-item nav-link p-1 " + (tab == "albums" ? "active-page" : "deactive-page") %>
+        <%= link_to "Manage Users", "/admin/users", method: :get, class: "feed-sidebar-item nav-link p-1 " + (tab == "users" ? "active-page" : "deactive-page") %>
+    <% else %>
+        <%= link_to "Feeds", "/feeds/feeds_photos", method: :get, class: "feed-sidebar-item nav-link p-1 " + (tab == "feeds" ? "active-page" : "deactive-page") %>
+        <%= link_to "Discover", "/feeds/discover_photos", method: :get, class: "feed-sidebar-item nav-link p-1 " + (tab == "discover" ? "active-page" : "deactive-page") %>
+    <% end %>
+<% else %>
+<!-- Only show the discovery button -->
+    <%= link_to "Discover", "/feeds/discover_photos", method: :get, class: "feed-sidebar-item nav-link p-1 " + (tab == "discover" ? "active-page" : "deactive-page") %>
+<% end %>

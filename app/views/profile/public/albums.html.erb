@@ -27,8 +27,7 @@
         <div class="sideBar col-xl-2 mt-xl-3 d-xl-block position-fixed collapse bg-theme01" id="collapSideBar">
             <div class="d-flex flex-column align-items-center">
                 <div class="py-2">
-                    <a class="feed-sidebar-item deactive-page nav-link p-1" href="/feeds/feeds_photos">Feeds</a>
-                    <a class="feed-sidebar-item deactive-page nav-link p-1" href="/feeds/discover_photos">Discover</a>
+                    <%= render partial: "partials/blocks/side_bar", locals: {tab: "profile"} %>
                 </div>                        
             </div>                    
         </div>

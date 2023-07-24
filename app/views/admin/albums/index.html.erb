@@ -27,9 +27,7 @@
         <div class="sideBar col-xl-2 mt-xl-3 d-xl-block position-fixed collapse bg-theme01" id="collapSideBar">
             <div class="d-flex flex-column align-items-center">
                 <div class="py-2">
-                    <%= link_to "Manage Photos", "/admin/photos", method: :get, class: "feed-sidebar-item deactive-page nav-link p-1" %>
-                    <%= link_to "Manage Albums", "/admin/albums", method: :get, class: "feed-sidebar-item active-page nav-link p-1" %>
-                    <%= link_to "Manage Users", "/admin/users", method: :get, class: "feed-sidebar-item deactive-page nav-link p-1" %>
+                    <%= render partial: "partials/blocks/side_bar", locals: {tab: "albums"} %>
                 </div>                        
             </div>                    
         </div>

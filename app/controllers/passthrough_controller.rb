@@ -2,7 +2,7 @@ class PassthroughController < ApplicationController
     def index
         path = case current_user_role
             when 'not_signed_in'
-                "/temps/feed"
+                "/feeds/discover_photos"
             when 'user'
                 "/feeds/feeds_photos"
             when 'admin'
@@ -12,7 +12,9 @@ class PassthroughController < ApplicationController
     end
 
     def go_to_public_profile
-        if params[:id].to_i == current_user.id
+        if not user_signed_in?
+            redirect_to "/profile/" + params[:id] + "/photos"
+        elsif params[:id].to_i == current_user.id
             redirect_to "/profile/photos"
         else
             redirect_to "/profile/" + params[:id] + "/photos"

@@ -27,9 +27,8 @@
         <div class="sideBar col-xl-2 mt-xl-3 d-xl-block position-fixed collapse bg-theme01" id="collapSideBar">
             <div class="d-flex flex-column align-items-center">
                 <div class="py-2">
-                    <a class="feed-sidebar-item deactive-page nav-link p-1" href="/feeds/feeds_photos">Feeds</a>
-                    <a class="feed-sidebar-item active-page nav-link p-1">Discover</a>
-                </div>                        
+                    <%= render partial: "partials/blocks/side_bar", locals: {tab: "discover"} %>
+                </div>
             </div>                    
         </div>
 
@@ -79,16 +78,12 @@
                                         <!-- Heart -->
                                         <span>
                                             <!-- Like/Unlike button -->
-                                            <% lp = pho.like_photos.where(user_id: current_user.id, photo_id: pho.id).first %>
-                                            <% if lp then %>
-                                                <!-- Current user already like this photo, so heart is red and action is dislike -->
-                                                <% heartSrouce = "/icon/heart-red.svg" %>
-                                                <%= link_to("/profile/unlike_photo/" + pho.id.to_s, method: :delete) do %><img src=<%= heartSrouce %> alt="..." class="feedHeartPicture p-0"><% end %>
+                                            <% if user_signed_in? %>
+                                                <% lp = pho.like_photos.where(user_id: current_user.id, photo_id: pho.id).first %>
+                                                <%= render partial: "partials/buttons/like", locals: {liked: (lp ? true : false), object_type: "photo", object_id: pho.id} %>
                                             <% else %>
-                                                <!-- Heart is empty and action is like -->
-                                                <% heartSrouce = "/icon/heart-blank.svg" %>
-                                                <%= link_to("/profile/like_photo/" + pho.id.to_s, method: :post) do %><img src=<%= heartSrouce %> alt="..." class="feedHeartPicture p-0"><% end %>
-                                            <% end %>                                            
+                                                <img src="/icon/heart-red.svg" alt="..." class="feedHeartPicture p-0">
+                                            <% end %>
                                             <!-- Number of likes -->
                                             <span class="feed-item-footnote">
                                                 <%= pho.like_photos_count.nil? ? 0 : pho.like_photos_count %>

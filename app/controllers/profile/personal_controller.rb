@@ -41,13 +41,8 @@ class Profile::PersonalController < ApplicationController
     end
 
     def unfollow
-        if params[:follow_record_id]
-            follow = Follow.find(params[:follow_record_id])
-            follow.destroy!
-        elsif params[:follower_id]
-            follow = Follow.where(followee_id: current_user.id, followee_id: params[:follower_id]).first
-            follow.destroy!
-        end
+        follow = Follow.where(follower_id: current_user.id, followee_id: params[:user_id]).first
+        follow.destroy!
         redirect_back fallback_location: "/"
     end
 

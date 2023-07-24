@@ -46,7 +46,7 @@
                     </div>
                     <div class="col-auto">
                         <div>
-                            <a type="button" class="btn btn-light border" href="#">Follow</a>
+                            <%= render partial: "partials/buttons/follow", locals: {followers: @followers, user_id: @user.id} %>
                         </div>
                         <div>
                             <p class="fs-2 fw-bold">

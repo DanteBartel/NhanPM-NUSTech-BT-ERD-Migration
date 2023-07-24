@@ -26,9 +26,10 @@ Rails.application.routes.draw do
   get "/profile/albums", to: "profile/personal#albums"
   get "/profile/followees", to: "profile/personal#followees"
   get "/profile/followers", to: "profile/personal#followers"
-  delete "/profile/followees/:follow_record_id", to: "profile/personal#unfollow"
-  delete "/profile/followers/:follower_id", to: "profile/personal#unfollow"
-  post "/profile/followers/:user_id", to: "profile/personal#follow"
+
+  # Routes for follow and unfollow
+  delete "/profile/unfollow/:user_id", to: "profile/personal#unfollow"
+  post "/profile/follow/:user_id", to: "profile/personal#follow"
 
   # Routes for public profiles
   get "/profile/:id/photos", to: "profile/public#photos"

@@ -109,10 +109,10 @@
 
                                 <div>
                                     <% if foees.exists?(foer.id) %>
-                                        <%= link_to "Following", "/profile/followers/" + foer.id.to_s, method: :delete, class: "btn btn-success border" %>
+                                        <%= link_to "Following", "/profile/unfollow/" + foer.id.to_s, method: :delete, class: "btn btn-success border" %>
                                     <% else %>
-                                        <%= link_to "Follow", "/profile/followers/" + foer.id.to_s, method: :post, class: "btn btn-light border" %>
-                                    <% end %>                                    
+                                        <%= link_to "Follow", "/profile/follow/" + foer.id.to_s, method: :post, class: "btn btn-light border" %>
+                                    <% end %>
                                 </div>
                             </div>
                         </div>

@@ -1,0 +1,5 @@
+<% if followers.exists?(current_user.id) %>
+    <%= link_to "Following", "/profile/unfollow/" + user_id.to_s, method: :delete, class: "btn btn-success border" %>
+<% else %>
+    <%= link_to "Follow", "/profile/follow/" + user_id.to_s, method: :post, class: "btn btn-light border" %>
+<% end %>

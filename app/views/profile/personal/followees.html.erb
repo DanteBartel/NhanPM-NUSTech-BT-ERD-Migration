@@ -85,18 +85,19 @@
                         <% foee = fol.followee %>
                         <div class="col-auto">
                             <div class="bg-theme01">
+                                <!-- avatar -->
                                 <div>
                                     <% if foee.avatar.representable? %>
                                         <%= image_tag foee.avatar, class: "myPhotoItemImg" %>
                                     <% end %>
                                 </div>
-
+                                <!-- name -->
                                 <div>
                                     <p>
                                         <%= foee.fname.to_s + " " + foee.lname.to_s %>
                                     </p>
                                 </div>
-
+                                <!-- photos and albums num -->
                                 <div>
                                     <a href="#">
                                         <%= (foee.photos_count.nil? ? 0 : foee.photos_count).to_s + " Photos" %>
@@ -105,9 +106,9 @@
                                         <%= (foee.albums_count.nil? ? 0 : foee.albums_count).to_s + " Albums" %>
                                     </a>
                                 </div>
-
+                                <!-- unfollow button -->
                                 <div>
-                                    <%= link_to "Unfollow", "/profile/followees/" + fol.id.to_s, method: :delete, class: "btn btn-danger border" %>
+                                    <%= link_to "Unfollow", "/profile/unfollow/" + foee.id.to_s, method: :delete, class: "btn btn-danger border" %>
                                 </div>
                             </div>
                         </div>

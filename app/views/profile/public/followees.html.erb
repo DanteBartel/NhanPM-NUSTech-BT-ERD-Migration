@@ -106,7 +106,7 @@
                                 </div>
 
                                 <div>
-                                    <%= link_to "Unfollow", "/profile/followees/" + fol.id.to_s, method: :delete, class: "btn btn-danger border" %>
+                                    <%= render partial: "partials/buttons/follow", locals: {followers: foee.followers, user_id: foee.id} %>
                                 </div>
                             </div>
                         </div>

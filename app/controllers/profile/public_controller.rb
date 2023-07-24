@@ -13,13 +13,13 @@ class Profile::PublicController < ApplicationController
 
     def followees
         @user = User.includes(:follows_as_follower, :followers).find(params[:id])
-        @follows_as_follower = @user.follows_as_follower.page(params[:page]).per(20)
+        @follows_as_follower = @user.follows_as_follower.includes(followee: :followers).page(params[:page]).per(20)
         @followers = @user.followers
     end
 
     def followers
         @user = User.includes(:follows_as_followee, :followers).find(params[:id])
-        @follows_as_followee = @user.follows_as_followee.page(params[:page]).per(20)
+        @follows_as_followee = @user.follows_as_followee.includes(follower: :followers).page(params[:page]).per(20)
         @followers = @user.followers
     end
 end

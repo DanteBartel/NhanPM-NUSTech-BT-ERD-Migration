@@ -1,8 +1,10 @@
 <% if user_signed_in? %>
     <% if current_user.is_admin %>
         <% logo_content = "Fotobook Admin" %>
+        <% profile_path = "/passthrough/index" %>
     <% else %>
         <% logo_content = "Fotobook" %>
+        <% profile_path = "/profile/photos" %>
     <% end %>
     <% user_name = current_user.fname + " " + current_user.lname %>
     <% inout_content = "Logout" %>
@@ -14,6 +16,7 @@
     <% inout_content = "Login" %>
     <% inout_path = "/users/sign_in" %>
     <% inout_method = :get %>
+    <% profile_path = "/passthrough/index" %>
 <% end %>
 
 <!-- ##################################### -->
@@ -26,7 +29,7 @@
             <input type="search" placeholder="Search Photo / Album">
         </div>
         <!-- profile -->
-        <a class="navigation-bar-profile d-flex align-items-center py-1 ms-auto ms-xl-0 me-3 me-xl-5 order-2 order-xl-3" href="/profile/photos">
+        <a class="navigation-bar-profile d-flex align-items-center py-1 ms-auto ms-xl-0 me-3 me-xl-5 order-2 order-xl-3" href=<%= profile_path %>>
             <div class="profile-picture-container bg-light color-theme me-2">
                 NP
             </div>

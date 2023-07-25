@@ -3,7 +3,7 @@
         
 
 <div class="main-background container-fluid">
-    <div class="row pb-2">
+    <div class="row pb-3">
 
         <!-- Side bar -->
         <div class="sideBar col-xl-2 mt-xl-3 d-xl-block position-fixed collapse bg-theme01" id="collapSideBar">
@@ -16,7 +16,7 @@
 
 
         <!-- Inside the feed -->
-        <div class="col-xl-8 mx-auto mt-3 bg-light row row-cols-1 justify-content-center">
+        <div class="col-xl-8 pb-3 mx-auto mt-3 bg-light row row-cols-1 justify-content-center">
 
             <!-- Personal info -->
             <div class="container-fluid">
@@ -98,21 +98,12 @@
 
             
             <!-- Pagination -->
-            <div>
-                <ul class="pagination justify-content-center mb-0 py-2">
-                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                </ul>
-            </div>
+            
 
             <div>
                 <%= paginate @follows_as_follower %>
             </div>
 
-            <br>
             
 
 

@@ -92,6 +92,7 @@ GEM
       regexp_parser (>= 1.5, < 3.0)
       xpath (~> 3.2)
     concurrent-ruby (1.2.2)
+    connection_pool (2.4.1)
     crass (1.0.6)
     date (3.3.3)
     debug (1.8.0)
@@ -104,6 +105,8 @@ GEM
       responders
       warden (~> 1.2.3)
     diff-lcs (1.5.0)
+    dockerfile-rails (1.5.2)
+      rails
     e2mmap (0.1.0)
     erubi (1.12.0)
     execjs (2.8.1)
@@ -179,6 +182,7 @@ GEM
     parser (3.2.2.3)
       ast (~> 2.4.1)
       racc
+    pg (1.5.3)
     popper_js (2.11.7)
     public_suffix (5.0.1)
     puma (5.6.6)
@@ -218,6 +222,10 @@ GEM
     rainbow (3.1.1)
     rake (13.0.6)
     rbs (2.8.4)
+    redis (5.0.6)
+      redis-client (>= 0.9.0)
+    redis-client (0.14.1)
+      connection_pool
     regexp_parser (2.8.1)
     reline (0.3.6)
       io-console (~> 0.5)
@@ -321,13 +329,16 @@ DEPENDENCIES
   capybara
   debug
   devise
+  dockerfile-rails (>= 1.5)
   image_processing (~> 1.2)
   importmap-rails
   jbuilder
   jquery-rails
   kaminari (~> 1.2)
+  pg (~> 1.5)
   puma (~> 5.0)
   rails (~> 7.0.5)
+  redis (~> 5.0)
   sassc-rails
   selenium-webdriver
   solargraph (~> 0.49.0)

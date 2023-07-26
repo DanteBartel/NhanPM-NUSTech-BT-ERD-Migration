@@ -36,18 +36,14 @@
                             </p>
                         </div>
                         <div>
-                            <a type="button" class="btn btn-light border" href="/profile/photos">
-                                <%= current_user.photos_count.to_s + " Photos" %>
-                            </a>
-                            <a type="button" class="btn btn-light border" href="/profile/albums">
-                                <%= current_user.albums_count.to_s + " Albums" %>
-                            </a>
-                            <a type="button" class="btn btn-success border" href="/profile/followees">
-                                <%= current_user.followees_count.to_s + " Followings" %>
-                            </a>
-                            <a type="button" class="btn btn-light border" href="/profile/followers">
-                                <%= current_user.followers_count.to_s + " Followers" %>
-                            </a>
+                            <% ["photos", "albums", "followees", "followers"].each do |type| %>
+                                <% if type == "followees" %>
+                                    <% state = "success" %>
+                                <% else %>
+                                    <% state = "light" %>
+                                <% end %>
+                                <%= render partial: "partials/buttons/profile_tab", locals: {object_type: type, user_objects_count: current_user.send(type + "_count"), state: state, user_id: nil} %>
+                            <% end %>
                         </div>
                     </div>
                 </div>

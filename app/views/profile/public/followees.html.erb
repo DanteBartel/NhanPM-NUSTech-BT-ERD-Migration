@@ -36,18 +36,14 @@
                             </p>
                         </div>
                         <div>
-                            <a type="button" class="btn btn-light border" href=<%= "/profile/" + @user.id.to_s + "/photos" %>>
-                                <%= @user.photos_count.to_s + " Photos" %>
-                            </a>
-                            <a type="button" class="btn btn-light border" href=<%= "/profile/" + @user.id.to_s + "/albums" %>>
-                                <%= @user.albums_count.to_s + " Albums" %>
-                            </a>
-                            <a type="button" class="btn btn-success border" href=<%= "/profile/" + @user.id.to_s + "/followees" %>>
-                                <%= @user.followees_count.to_s + " Followings" %>
-                            </a>
-                            <a type="button" class="btn btn-light border" href=<%= "/profile/" + @user.id.to_s + "/followers" %>>
-                                <%= @user.followers_count.to_s + " Followers" %>
-                            </a>
+                            <% ["photos", "albums", "followees", "followers"].each do |type| %>
+                                <% if type == "followees" %>
+                                    <% state = "success" %>
+                                <% else %>
+                                    <% state = "light" %>
+                                <% end %>
+                                <%= render partial: "partials/buttons/profile_tab", locals: {object_type: type, user_objects_count: @user.send(type + "_count"), state: state, user_id: @user.id} %>
+                            <% end %>
                         </div>
                     </div>
                 </div>

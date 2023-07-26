@@ -1,0 +1,18 @@
+<% button_class = "btn border btn-" + state %>
+<% if user_id %>
+    <% path = "/profile/" + user_id.to_s + "/" + object_type %>
+<% else %>
+    <% path = "/profile/" + object_type %>
+<% end %>
+<% if object_type == "followees" %>
+    <% allias = "followings" %>
+<% else %>
+    <% allias = object_type %>
+<% end %>
+<% if not user_objects_count %>
+    <% user_objects_count = 0 %>
+<% end %>
+<!-- ################################# -->
+<a type="button" class="<%= button_class %>" href=<%= path %>>
+    <%= user_objects_count.to_s + " " + allias %>
+</a>

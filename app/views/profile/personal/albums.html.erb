@@ -118,7 +118,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="container-fluid text-center">                            
-                        <div id="carouselFeedAlbumControls" class="carousel slide" data-bs-ride="carousel">
+                        <div id=<%= "carouselFeedAlbumControls_" + al.id.to_s %> class="carousel slide" data-bs-ride="carousel">
                             <div class="carousel-inner">
                                 <!-- Images inside modal -->
                                 <% al.images.each_with_index do |img, idx| %>
@@ -127,11 +127,11 @@
                                     </div>
                                 <% end %>
                             </div>
-                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselFeedAlbumControls" data-bs-slide="prev">
+                            <button class="carousel-control-prev" type="button" data-bs-target=<%= "#carouselFeedAlbumControls_" + al.id.to_s %> data-bs-slide="prev">
                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                 <span class="visually-hidden">Previous</span>
                             </button>
-                            <button class="carousel-control-next" type="button" data-bs-target="#carouselFeedAlbumControls" data-bs-slide="next">
+                            <button class="carousel-control-next" type="button" data-bs-target=<%= "#carouselFeedAlbumControls_" + al.id.to_s %> data-bs-slide="next">
                                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                 <span class="visually-hidden">Next</span>
                             </button>

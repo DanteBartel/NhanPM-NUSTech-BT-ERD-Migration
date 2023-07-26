@@ -67,7 +67,9 @@
                                             </span>
                                         </span>
                                         <!-- Create time -->
-                                        <span class="feed-item-footnote"> <%= pho.created_at %> </span>
+                                        <span class="feed-item-footnote">
+                                            <%= p_datetime(pho.created_at) %>
+                                        </span>
                                     </div>
                                 </div>
                             </div>                                

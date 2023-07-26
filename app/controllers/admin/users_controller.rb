@@ -25,6 +25,13 @@ class Admin::UsersController < ApplicationController
         redirect_back fallback_location: "/"
     end
 
+    def destroy
+        user = User.find(params[:id])
+        if user.destroy!
+            redirect_back fallback_location: "/"
+        end
+    end
+
 
     # ----------------------------------------------------------------
     private

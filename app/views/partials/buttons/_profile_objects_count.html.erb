@@ -1,0 +1,9 @@
+<% path = "/passthrough/go_to_public_" + objects_type + "/" + user_id.to_s %>
+<a href=<%= path %> class="btn color-theme">
+    <div class="fs-3 fw-bold">
+        <%= (objects_count.nil? ? 0 : objects_count).to_s %>
+    </div>
+    <div>
+        <%= objects_type %>
+    </div>
+</a>

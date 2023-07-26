@@ -37,8 +37,10 @@ Rails.application.routes.draw do
   get "/profile/:id/followees", to: "profile/public#followees"
   get "/profile/:id/followers", to: "profile/public#followers"
 
-  # Routes for passing through the public prfiles url
+  # Routes for passing through the public profiles url
   get "/passthrough/go_to_public_profile/:id", to: "passthrough#go_to_public_profile"
+  get "/passthrough/go_to_public_photos/:user_id", to: "passthrough#go_to_public_photos"
+  get "/passthrough/go_to_public_albums/:user_id", to: "passthrough#go_to_public_albums"
 
   # Routes for like and unlike photos / albums
   post "/profile/like_photo/:photo_id", to: "profile/personal#like_photo"

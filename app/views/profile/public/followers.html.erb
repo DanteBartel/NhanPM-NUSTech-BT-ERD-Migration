@@ -73,13 +73,9 @@
                                     </p>
                                 </div>
 
-                                <div>
-                                    <a href="#">
-                                        <%= (foer.photos_count.nil? ? 0 : foer.photos_count).to_s + " Photos" %>
-                                    </a>
-                                    <a href="#">
-                                        <%= (foer.albums_count.nil? ? 0 : foer.albums_count).to_s + " Albums" %>
-                                    </a>
+                                <div class="d-flex justify-content-evenly">
+                                    <%= render partial: "partials/buttons/profile_objects_count", locals: {objects_type: "photos", objects_count: foer.photos_count, user_id: foer.id} %>
+                                    <%= render partial: "partials/buttons/profile_objects_count", locals: {objects_type: "albums", objects_count: foer.albums_count, user_id: foer.id} %>
                                 </div>
 
                                 <div>

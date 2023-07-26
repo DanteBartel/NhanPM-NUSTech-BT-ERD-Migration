@@ -21,6 +21,26 @@ class PassthroughController < ApplicationController
         end
     end
 
+    def go_to_public_photos
+        if not user_signed_in?
+            redirect_to "/profile/" + params[:user_id] + "/photos"
+        elsif params[:user_id].to_i == current_user.id
+            redirect_to "/profile/photos"
+        else
+            redirect_to "/profile/" + params[:user_id] + "/photos"
+        end
+    end
+
+    def go_to_public_albums
+        if not user_signed_in?
+            redirect_to "/profile/" + params[:user_id] + "/albums"
+        elsif params[:user_id].to_i == current_user.id
+            redirect_to "/profile/albums"
+        else
+            redirect_to "/profile/" + params[:user_id] + "/albums"
+        end
+    end
+
     private
 
     def current_user_role

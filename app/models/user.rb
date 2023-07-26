@@ -30,8 +30,7 @@ class User < ApplicationRecord
 
     # Check for active state to ban from signing in
     def active_for_authentication?
-        super
-        self.is_active
+        super && self.is_active
     end
 
     # Note: remember the max length of password is 64

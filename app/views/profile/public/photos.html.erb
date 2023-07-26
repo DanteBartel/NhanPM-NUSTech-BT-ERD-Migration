@@ -31,11 +31,13 @@
                         <div>
                             <%= render partial: "partials/buttons/follow", locals: {followers: @followers, user_id: @user.id} %>
                         </div>
+                        <!-- Name -->
                         <div>
                             <p class="fs-2 fw-bold">
                                 <%= @user.fname.to_s + " " + @user.lname.to_s %>
                             </p>
                         </div>
+                        <!-- 4 info buttons -->
                         <div>
                             <a type="button" class="btn btn-success border" href=<%= "/profile/" + @user.id.to_s + "/photos" %>>
                                 <%= @user.photos_count.to_s + " Photos" %>

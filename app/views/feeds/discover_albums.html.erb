@@ -38,14 +38,20 @@
                                 <!-- info -->
                                 <div class="flex-grow-1 p-2 d-flex flex-column">
                                     <!-- user name -->
-                                    <%= link_to("/passthrough/go_to_public_profile/" + al.user_id.to_s, method: :get, class: "d-flex align-items-center profileLink") do %>
-                                        <div class="profile-picture-container bg-theme text-white me-2 ">
-                                            NP
+                                    <div class="d-flex">
+                                        <%= link_to("/passthrough/go_to_public_profile/" + al.user_id.to_s, method: :get, class: "d-flex align-items-center profileLink") do %>
+                                            <div class="profile-picture-container bg-theme text-white me-2 ">
+                                                NP
+                                            </div>
+                                            <div class="color-theme">
+                                                <%= al.user.fname + " " + al.user.lname %>
+                                            </div>
+                                        <% end %>
+                                        <!-- follow button -->
+                                        <div class="ms-auto">
+                                            <%= render partial: "partials/buttons/follow", locals: {followers: al.user.followers, user_id: al.user_id} %>
                                         </div>
-                                        <div class="color-theme">
-                                            <%= al.user.fname + " " + al.user.lname %>
-                                        </div>
-                                    <% end %>
+                                    </div>
                                     <!-- album title -->
                                     <div class="feed-item-title py-1">
                                         <%= al.title %>

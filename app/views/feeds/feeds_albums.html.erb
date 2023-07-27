@@ -38,14 +38,10 @@
                                 <!-- info -->
                                 <div class="flex-grow-1 p-2 d-flex flex-column">
                                     <!-- user name -->
-                                    <%= link_to("/passthrough/go_to_public_profile/" + al.user_id.to_s, method: :get, class: "d-flex align-items-center profileLink") do %>
-                                        <div class="profile-picture-container bg-theme text-white me-2 ">
-                                            NP
-                                        </div>
-                                        <div class="color-theme">
-                                            <%= al.user.fname + " " + al.user.lname %>
-                                        </div>
-                                    <% end %>
+                                    <% profile_path = "/passthrough/go_to_public_profile/" + al.user_id.to_s %>
+                                    <% user_avatar = al.user.avatar %>
+                                    <% user_name = al.user.fname + " " + al.user.lname %>
+                                    <%= render partial: "partials/buttons/profile_tag", locals: {profile_path: profile_path, user_avatar: user_avatar, user_name: user_name, type: "feeds"} %>
                                     <!-- album title -->
                                     <div class="feed-item-title py-1">
                                         <%= al.title %>

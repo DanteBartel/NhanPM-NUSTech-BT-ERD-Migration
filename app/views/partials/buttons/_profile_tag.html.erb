@@ -1,0 +1,22 @@
+<% if type == "feeds" %>
+    <% avatar_class = "profile-picture-container bg-theme color-light me-2" %>
+    <% name_class = "color-theme" %>
+<% else %>
+    <% avatar_class = "profile-picture-container bg-light color-theme me-2" %>
+    <% name_class = "color-light" %>
+<% end %>
+
+
+<!-- ####################### -->
+<a class="navigation-bar-profile d-flex align-items-center" href=<%= profile_path %>>
+    <div class="<%= avatar_class %>">
+        <% if not user_avatar %>
+            <%= short_name(user_name) %>
+        <% elsif user_avatar.representable? %>
+            <%= image_tag user_avatar, class: "navigation-bar-avatar rounded-circle" %>
+        <% else %>
+            <%= short_name(user_name) %>
+        <% end %>
+    </div>
+    <div class="<%= name_class %>"><%= user_name %></div>
+</a>

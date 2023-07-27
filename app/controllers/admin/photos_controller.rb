@@ -1,6 +1,7 @@
 class Admin::PhotosController < ApplicationController
     def index
-        @photos = Photo.all.order(created_at: :desc).page(params[:page]).per(40)
+        photos = Photo.all.order(created_at: :desc)
+        @pagy, @photos = pagy(photos.all, items: ADMIN_ITEMS_PER_PAGE)
     end
 
     def edit

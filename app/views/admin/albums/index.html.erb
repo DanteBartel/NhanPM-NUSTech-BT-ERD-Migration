@@ -3,7 +3,7 @@
         
 
 <div class="main-background container-fluid">
-    <div class="row pb-2">
+    <div class="row pb-3">
 
         <!-- Side bar -->
         <div class="sideBar col-xl-2 mt-xl-3 d-xl-block position-fixed collapse bg-theme01" id="collapSideBar">
@@ -16,7 +16,7 @@
 
 
         <!-- Inside the feed -->
-        <div class="col-xl-8 mx-auto mt-3 bg-light row row-cols-1 justify-content-center">
+        <div class="col-xl-8 pb-3 mx-auto mt-3 bg-light row row-cols-1 justify-content-center">
             <!-- List of My Photo items -->
             <div class="container-fluid mt-3">
                 <div class="row g-3">
@@ -55,13 +55,12 @@
 
             
             <!-- Pagination -->
-            
-
-            <div>
-                <%= paginate @albums %>
+            <div class="mt-3 d-flex justify-content-center">
+                <%== pagy_bootstrap_nav(@pagy) %>
             </div>
 
-            <br>
+            
+
             
 
 

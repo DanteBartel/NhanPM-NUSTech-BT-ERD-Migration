@@ -1,12 +1,14 @@
 class Profile::PersonalController < ApplicationController
     def photos
         user = User.includes(:photos).find(current_user.id)
-        @photos = user.photos.order(created_at: :desc).page(params[:page]).per(20)
+        photos = user.photos.order(created_at: :desc)
+        @pagy, @photos = pagy(photos.all, items: PROFILE_ITEMS_PER_PAGE)
     end
 
     def albums
         user = User.includes(:albums).find(current_user.id)
-        @albums = user.albums.order(created_at: :desc).page(params[:page]).per(20)
+        albums = user.albums.order(created_at: :desc)
+        @pagy, @albums = pagy(albums.all, items: PROFILE_ITEMS_PER_PAGE)
     end
 
     def edit
@@ -28,11 +30,13 @@ class Profile::PersonalController < ApplicationController
     end
 
     def followees
-        @follows_as_follower = current_user.follows_as_follower.page(params[:page]).per(20)
+        follows_as_follower = current_user.follows_as_follower
+        @pagy, @follows_as_follower = pagy(follows_as_follower.all, items: PROFILE_ITEMS_PER_PAGE)
     end
 
     def followers
-        @follows_as_followee = current_user.follows_as_followee.page(params[:page]).per(20)
+        follows_as_followee = current_user.follows_as_followee
+        @pagy, @follows_as_followee = pagy(follows_as_followee.all, items: PROFILE_ITEMS_PER_PAGE)
     end
 
     def follow        

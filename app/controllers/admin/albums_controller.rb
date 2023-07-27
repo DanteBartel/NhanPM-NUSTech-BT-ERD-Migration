@@ -1,6 +1,7 @@
 class Admin::AlbumsController < ApplicationController
     def index
-        @albums = Album.all.order(created_at: :desc).page(params[:page]).per(40)
+        albums = Album.all.order(created_at: :desc)
+        @pagy, @albums = pagy(albums.all, items: ADMIN_ITEMS_PER_PAGE)
     end
 
     def edit

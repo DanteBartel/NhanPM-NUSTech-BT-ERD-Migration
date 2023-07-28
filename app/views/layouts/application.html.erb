@@ -12,6 +12,37 @@
 
   <body>    
 
+    <%= render partial: "partials/blocks/navi_bar" %>
+    
+    <!--
+    <% if notice %>
+      <div class="alert alert-success position-fixed end-0 alert-dismissible fade show" role="alert">
+        <%= notice %>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    <% end %>
+    -->
+
+    <% if alert %>
+      <div class="alert alert-danger position-fixed end-0 alert-dismissible fade show" role="alert">
+        <%= alert %>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    <% end %>
+
+    <% if defined?(resource) %>
+      <% if resource.errors.any? %>
+        <div class="alert alert-danger position-fixed end-0 alert-dismissible fade show" role="alert">
+          <% resource.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>      
+      <% end %>
+    <% end %>
+    
+
+
     <%= yield %>
 
     

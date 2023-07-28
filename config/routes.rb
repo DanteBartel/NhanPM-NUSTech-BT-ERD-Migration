@@ -4,7 +4,8 @@ Rails.application.routes.draw do
   # routes for devise
   devise_for :users, controllers: { sessions: 'users/sessions', registrations: "users/registrations" }
   as :user do
-    get '/' => 'users/sessions#new'
+    # get '/' => 'users/sessions#new'
+    get "/" => "passthrough#index"
   end
 
   # routes for directing to passthrough controller after login

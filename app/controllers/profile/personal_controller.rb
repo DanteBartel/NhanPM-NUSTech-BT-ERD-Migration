@@ -14,7 +14,7 @@ class Profile::PersonalController < ApplicationController
     def edit
         # Edit info
         user = User.find(current_user.id)
-        user.update!(edit_params)        
+        user.update!(edit_params)
         # Edit avatar
         if params[:avatar]
             if user.avatar.attached?
